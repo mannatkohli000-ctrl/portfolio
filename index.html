@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MANNAT — AI Video Creator | Cinematic Storytelling</title>
+  <meta name="description" content="Mannat is an AI video creator specializing in brand storytelling, AI UGC-style ads, product advertisements, cinematic AI videos, and short-form social content for international brands and creators." />
+  <meta property="og:title" content="MANNAT — AI Video Creator" />
+  <meta property="og:description" content="Cinematic storytelling. AI-powered creativity. Brand storytelling, UGC ads, product ads, and short-form content for international clients." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#05070B" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ========== CSS VARIABLES ========== */
+    :root {
+      --bg-near-black: #05070B;
+      --bg-deep-navy: #0A1226;
+      --bg-navy: #0E1A33;
+      --gold: #D4AF37;
+      --gold-light: #F1D98A;
+      --ivory: #F4F1EA;
+      --muted: #9AA3B5;
+      --text: #F4F1EA;
+      --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2.5rem;
+      --space-xl: 4rem;
+      --space-2xl: 6rem;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --nav-height: 72px;
+      --max-width: 1200px;
+    }
+
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-near-black);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea {
+      font: inherit;
+      color: inherit;
+      border: none;
+      background: none;
+    }
+    ul, ol { list-style: none; }
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    /* ========== FILM GRAIN OVERLAY ========== */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 180px;
+    }
+
+    /* ========== TYPOGRAPHY ========== */
+    .label {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    h1, h2, h3 {
+      font-family: var(--font-serif);
+      font-weight: 500;
+      line-height: 1.15;
+    }
+    h2 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      margin-bottom: var(--space-md);
+    }
+    .section-label {
+      display: block;
+      margin-bottom: var(--space-sm);
+    }
+    .muted { color: var(--muted); }
+    .gold { color: var(--gold); }
+
+    /* ========== LAYOUT ========== */
+    .container {
+      width: min(100% - 2rem, var(--max-width));
+      margin-inline: auto;
+    }
+    section {
+      padding: var(--space-2xl) 0;
+      position: relative;
+    }
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto var(--space-xl);
+    }
+    .section-header p {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+    .hairline {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.35;
+      margin: 0 auto;
+      max-width: 120px;
+    }
+
+    /* ========== NAVIGATION ========== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      transition: background var(--transition), backdrop-filter var(--transition), box-shadow var(--transition);
+    }
+    .nav.scrolled {
+      background: rgba(5, 7, 11, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(212, 175, 55, 0.12);
+    }
+    .nav-inner {
+      width: min(100% - 2rem, var(--max-width));
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .wordmark {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      position: relative;
+      padding: 0.35rem 0;
+      transition: color var(--transition);
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--ivory);
+    }
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after {
+      width: 100%;
+    }
+    .btn-hire {
+      display: none;
+      padding: 0.65rem 1.4rem;
+      background: var(--gold);
+      color: var(--bg-near-black);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      min-height: 44px;
+      align-items: center;
+    }
+    .btn-hire:hover,
+    .btn-hire:focus-visible {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
+    }
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      width: 44px;
+      height: 44px;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    .hamburger span {
+      display: block;
+      height: 1.5px;
+      width: 100%;
+      background: var(--gold);
+      transition: transform var(--transition), opacity var(--transition);
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(7.5px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-7.5px) rotate(-45deg);
+    }
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 7, 11, 0.97);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.75rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition), visibility var(--transition);
+      z-index: 999;
+    }
+    .mobile-menu.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .mobile-menu a {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      color: var(--ivory);
+      letter-spacing: 0.06em;
+      transition: color var(--transition);
+    }
+    .mobile-menu a:hover,
+    .mobile-menu a:focus-visible { color: var(--gold); }
+    .mobile-menu .btn-hire-mobile {
+      margin-top: 1rem;
+      padding: 0.85rem 2rem;
+      background: var(--gold);
+      color: var(--bg-near-black);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    @media (min-width: 900px) {
+      .nav-links { display: flex; }
+      .btn-hire { display: inline-flex; }
+      .hamburger { display: none; }
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: calc(var(--nav-height) + 2rem) 1.5rem 4rem;
+      overflow: hidden;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(14, 26, 51, 0.9) 0%, var(--bg-near-black) 70%);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.06) 0%, transparent 55%);
+      pointer-events: none;
+      animation: heroGlow 12s ease-in-out infinite alternate;
+    }
+    @keyframes heroGlow {
+      0% { opacity: 0.6; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.08); }
+    }
+    .letterbox {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 0;
+      background: var(--bg-near-black);
+      z-index: 5;
+      transition: height 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .letterbox.top { top: 0; }
+    .letterbox.bottom { bottom: 0; }
+    .letterbox.reveal { height: 6vh; }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+    .hero .label {
+      margin-bottom: 1.25rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.3s forwards;
+    }
+    .hero-name {
+      font-family: var(--font-serif);
+      font-size: clamp(3.5rem, 12vw, 7.5rem);
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      line-height: 1;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 45%, #B8962E 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.45s forwards;
+    }
+    .hero-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 400;
+      color: var(--ivory);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.6s forwards;
+    }
+    .hero-tagline {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.04em;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.75s forwards;
+    }
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.9s forwards;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.85rem 1.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      transition: background var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--bg-near-black);
+    }
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(212, 175, 55, 0.35);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+    .btn-outline:hover,
+    .btn-outline:focus-visible {
+      background: rgba(212, 175, 55, 0.1);
+      transform: translateY(-2px);
+    }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.9s 1.2s forwards;
+      z-index: 2;
+    }
+    .scroll-indicator .mouse {
+      width: 22px;
+      height: 34px;
+      border: 1.5px solid var(--muted);
+      border-radius: 12px;
+      position: relative;
+    }
+    .scroll-indicator .mouse::after {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 2px;
+      animation: scrollDot 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollDot {
+      0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+      50% { opacity: 0.3; transform: translateX(-50%) translateY(10px); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========== FADE-UP ON SCROLL ========== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== ABOUT ========== */
+    .about {
+      background: linear-gradient(180deg, var(--bg-near-black) 0%, var(--bg-deep-navy) 50%, var(--bg-near-black) 100%);
+    }
+    .about-content {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .about-content p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+    .about-content p strong {
+      color: var(--ivory);
+      font-weight: 500;
+    }
+    .focus-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .focus-tag {
+      padding: 0.5rem 1.1rem;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .focus-tag:hover {
+      border-color: var(--gold);
+      background: rgba(212, 175, 55, 0.08);
+    }
+
+    /* ========== SERVICES ========== */
+    .services {
+      background: var(--bg-near-black);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 640px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1.25rem;
+      }
+      .services-grid .service-card:nth-child(1),
+      .services-grid .service-card:nth-child(2),
+      .services-grid .service-card:nth-child(3) {
+        grid-column: span 2;
+      }
+      .services-grid .service-card:nth-child(4),
+      .services-grid .service-card:nth-child(5) {
+        grid-column: span 3;
+      }
+    }
+    /* Package strip */
+    .package-strip {
+      padding: var(--space-xl) 0;
+      background: linear-gradient(180deg, var(--bg-near-black) 0%, var(--bg-deep-navy) 50%, var(--bg-near-black) 100%);
+    }
+    .package-inner {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(160deg, rgba(14, 26, 51, 0.8) 0%, rgba(10, 18, 38, 0.9) 100%);
+      position: relative;
+    }
+    .package-inner::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.5;
+    }
+    .package-inner h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin-bottom: 0.75rem;
+    }
+    .package-inner p {
+      color: var(--muted);
+      margin-bottom: 1.75rem;
+      font-size: 1.05rem;
+    }
+    .service-card {
+      background: linear-gradient(160deg, var(--bg-navy) 0%, var(--bg-deep-navy) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.12);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(212, 175, 55, 0.08);
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 1.25rem;
+      color: var(--gold);
+    }
+    .service-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.65rem;
+      color: var(--ivory);
+    }
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      flex-grow: 1;
+      margin-bottom: 1.25rem;
+    }
+    .service-card .enquire {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap var(--transition);
+    }
+    .service-card .enquire:hover { gap: 0.65rem; }
+    .service-card .enquire svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ========== PORTFOLIO ========== */
+    .portfolio {
+      background: linear-gradient(180deg, var(--bg-near-black) 0%, var(--bg-deep-navy) 40%, var(--bg-near-black) 100%);
+    }
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+    .filter-chip {
+      padding: 0.5rem 1.15rem;
+      border: 1px solid rgba(154, 163, 181, 0.3);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all var(--transition);
+      min-height: 40px;
+    }
+    .filter-chip:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+    .filter-chip.active {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 640px) {
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .portfolio-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .portfolio-card {
+      background: var(--bg-navy);
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+    .portfolio-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(212, 175, 55, 0.35);
+      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.35), 0 0 24px rgba(212, 175, 55, 0.06);
+    }
+    .portfolio-card.hidden { display: none; }
+    .thumb {
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(145deg, #0E1A33 0%, #05070B 60%, #0A1226 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .thumb.vertical {
+      aspect-ratio: 9 / 16;
+      max-height: 480px;
+    }
+    .thumb.has-video {
+      background: #0A1226;
+    }
+    .thumb.has-video::before,
+    .thumb.has-video::after {
+      display: none;
+    }
+    .thumb video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: #0A1226;
+    }
+    .thumb video:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: -2px;
+    }
+    /* Film frame motif */
+    .thumb::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .thumb::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 8px,
+        rgba(212, 175, 55, 0.2) 8px,
+        rgba(212, 175, 55, 0.2) 12px
+      );
+      opacity: 0.5;
+      z-index: 1;
+    }
+    .play-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(212, 175, 55, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      transition: transform var(--transition), border-color var(--transition), background var(--transition);
+      position: relative;
+      z-index: 1;
+    }
+    .portfolio-card:hover .play-icon {
+      transform: scale(1.08);
+      border-color: var(--gold);
+      background: rgba(212, 175, 55, 0.1);
+    }
+    .play-icon svg {
+      width: 18px;
+      height: 18px;
+      margin-left: 2px;
+    }
+    .badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 0.3rem 0.65rem;
+      background: rgba(5, 7, 11, 0.85);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      z-index: 2;
+    }
+    .card-body {
+      padding: 1.15rem 1.25rem 1.35rem;
+    }
+    .card-cat {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.35rem;
+    }
+    .card-body h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.35rem;
+      color: var(--ivory);
+    }
+    .card-body p {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    /* Design portfolio cards */
+    .thumb.design {
+      background: linear-gradient(145deg, #0E1A33 0%, #05070B 55%, #0A1226 100%);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    .thumb.square { aspect-ratio: 1 / 1; }
+    .thumb.portrait { aspect-ratio: 4 / 5; max-height: 360px; }
+    .thumb.landscape { aspect-ratio: 16 / 9; }
+    .thumb.design .design-sample {
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .portfolio-card:hover .thumb.design .design-sample {
+      transform: scale(1.04);
+    }
+    .thumb.design img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .portfolio-card:hover .thumb.design img {
+      transform: scale(1.05);
+    }
+    .portfolio-card[data-category="design"] {
+      cursor: pointer;
+    }
+    .badge.concept {
+      border-color: rgba(212, 175, 55, 0.5);
+      color: var(--gold);
+    }
+    .thumb.story-ratio {
+      aspect-ratio: 9 / 16;
+      max-height: 420px;
+    }
+    .lightbox-inner svg {
+      max-width: 100%;
+      max-height: 85vh;
+      display: block;
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: var(--radius);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      background: var(--bg-near-black);
+    }
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(5, 7, 11, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition), visibility var(--transition);
+    }
+    .lightbox.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .lightbox-inner {
+      position: relative;
+      max-width: min(960px, 100%);
+      max-height: 90vh;
+    }
+    .lightbox-inner img {
+      max-width: 100%;
+      max-height: 85vh;
+      display: block;
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: var(--radius);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: -2.5rem;
+      right: 0;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 1.5rem;
+      cursor: pointer;
+      background: transparent;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 4px;
+      transition: background var(--transition);
+    }
+    .lightbox-close:hover,
+    .lightbox-close:focus-visible {
+      background: rgba(212, 175, 55, 0.15);
+    }
+    .lightbox-caption {
+      text-align: center;
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    /* Featured external reference */
+    .featured-ref {
+      margin-top: 2.5rem;
+      background: linear-gradient(135deg, var(--bg-navy) 0%, var(--bg-deep-navy) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    @media (min-width: 640px) {
+      .featured-ref {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.75rem 2rem;
+      }
+    }
+    .featured-ref .ref-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.35rem;
+    }
+    .featured-ref h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.4rem;
+    }
+    .featured-ref p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 480px;
+    }
+    .portfolio-note {
+      text-align: center;
+      margin-top: 2.5rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    /* ========== WHY WORK WITH ME ========== */
+    .why {
+      background: var(--bg-near-black);
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    @media (min-width: 640px) {
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 900px) {
+      .why-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .why-item {
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+    .why-item .num {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+      opacity: 0.7;
+    }
+    .why-item h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.5rem;
+      color: var(--ivory);
+    }
+    .why-item p {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    /* ========== CONTACT ========== */
+    .contact {
+      background: linear-gradient(180deg, var(--bg-near-black) 0%, var(--bg-deep-navy) 50%, var(--bg-near-black) 100%);
+    }
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    @media (min-width: 900px) {
+      .contact-layout {
+        grid-template-columns: 1fr 1.4fr;
+        gap: 4rem;
+        align-items: start;
+      }
+    }
+    .contact-info h2 { text-align: left; }
+    .contact-info .section-label { text-align: left; }
+    .contact-details {
+      margin-top: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+    }
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .contact-detail span {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .contact-detail a,
+    .contact-detail p {
+      font-size: 1.05rem;
+      color: var(--ivory);
+      transition: color var(--transition);
+    }
+    .contact-detail a:hover,
+    .contact-detail a:focus-visible {
+      color: var(--gold);
+    }
+    .availability {
+      margin-top: 2rem;
+      padding: 1rem 1.25rem;
+      border-left: 2px solid var(--gold);
+      background: rgba(212, 175, 55, 0.05);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .form-card {
+      background: linear-gradient(160deg, var(--bg-navy) 0%, var(--bg-deep-navy) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 1.5rem;
+    }
+    @media (min-width: 640px) {
+      .form-card { padding: 2rem; }
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.45rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: rgba(5, 7, 11, 0.6);
+      border: 1px solid rgba(154, 163, 181, 0.25);
+      border-radius: 6px;
+      color: var(--ivory);
+      font-size: 0.95rem;
+      transition: border-color var(--transition);
+      min-height: 48px;
+    }
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .form-group select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%239AA3B5' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 500px) {
+      .form-row { grid-template-columns: 1fr 1fr; }
+    }
+    .form-message {
+      display: none;
+      padding: 0.85rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .form-message.success {
+      display: block;
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      color: var(--gold-light);
+    }
+    .form-message.error {
+      display: block;
+      background: rgba(180, 60, 60, 0.12);
+      border: 1px solid rgba(180, 60, 60, 0.35);
+      color: #E8A0A0;
+    }
+    .form-card .btn-primary {
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      padding: 3rem 0 2rem;
+      border-top: 1px solid rgba(212, 175, 55, 0.12);
+      background: var(--bg-near-black);
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      justify-content: center;
+    }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color var(--transition);
+    }
+    .footer-links a:hover,
+    .footer-links a:focus-visible { color: var(--gold); }
+    .footer-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .footer-contact a {
+      transition: color var(--transition);
+    }
+    .footer-contact a:hover,
+    .footer-contact a:focus-visible { color: var(--gold); }
+    .copyright {
+      font-size: 0.8rem;
+      color: var(--muted);
+      opacity: 0.7;
+    }
+
+    /* ========== UTILITIES ========== */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- ========== NAVIGATION ========== -->
+  <header class="nav" id="nav" role="banner">
+    <div class="nav-inner">
+      <a href="#home" class="wordmark" aria-label="MANNAT — Home">MANNAT</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a href="#contact" class="btn-hire">Hire Me</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile navigation">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="btn-hire-mobile">Hire Me</a>
+  </div>
+
+  <main>
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="home" aria-label="Hero">
+      <div class="letterbox top" id="letterbox-top"></div>
+      <div class="letterbox bottom" id="letterbox-bottom"></div>
+      <div class="hero-content">
+        <p class="label">AI Video Creator</p>
+        <h1 class="hero-name">MANNAT</h1>
+        <p class="hero-headline">AI Video Creator &amp; Creative Content Specialist</p>
+        <p class="hero-tagline">Cinematic storytelling. AI-powered creativity.</p>
+        <div class="hero-ctas">
+          <a href="#portfolio" class="btn btn-primary">View My Work</a>
+          <a href="#contact" class="btn btn-outline">Contact Me</a>
+        </div>
+      </div>
+      <div class="scroll-indicator" aria-hidden="true">
+        <div class="mouse"></div>
+        <span>Scroll</span>
+      </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section class="about" id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="label section-label">About</span>
+          <h2 id="about-heading">Crafting stories with AI</h2>
+          <div class="hairline" style="margin-top: 1.25rem;"></div>
+        </div>
+        <div class="about-content fade-up">
+          <p>
+            Mannat is an AI video creator focused on <strong>brand storytelling</strong>, AI UGC-style ads, product advertisements, cinematic AI videos, and short-form social media content.
+          </p>
+          <p>
+            Alongside video, Mannat also creates graphic design assets such as social media creatives, thumbnails, and promotional visuals so a brand's look stays consistent across every platform.
+          </p>
+          <p>
+            Working remotely with international brands and creators across the US, UK, UAE, Europe, and Australia, Mannat prioritises clear communication and fast turnaround—delivering polished, platform-ready work that feels intentional and on-brand.
+          </p>
+          <div class="focus-tags">
+            <span class="focus-tag">Brand Storytelling</span>
+            <span class="focus-tag">AI UGC Ads</span>
+            <span class="focus-tag">Product Ads</span>
+            <span class="focus-tag">Cinematic AI</span>
+            <span class="focus-tag">Short-Form Content</span>
+            <span class="focus-tag">Graphic Design</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SERVICES ========== -->
+    <section class="services" id="services" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="label section-label">Services</span>
+          <h2 id="services-heading">What I create</h2>
+          <p>Video and design services tailored for brands, agencies, and creators.</p>
+          <div class="hairline" style="margin-top: 1.25rem;"></div>
+        </div>
+        <div class="services-grid">
+          <!-- Service 1 -->
+          <article class="service-card fade-up">
+            <svg class="service-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+              <rect x="6" y="10" width="28" height="20" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="20" cy="20" r="5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M14 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <h3>AI UGC-Style Ads</h3>
+            <p>Authentic, creator-style ads designed for social platforms—natural, relatable, and built to convert.</p>
+            <a href="#contact" class="enquire">Enquire <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
+          <!-- Service 2 -->
+          <article class="service-card fade-up">
+            <svg class="service-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+              <path d="M8 28L16 12l6 10 4-6 6 12H8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              <circle cx="28" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <h3>AI Product Advertisements</h3>
+            <p>Polished, high-impact visuals that showcase products with clarity, style, and commercial appeal.</p>
+            <a href="#contact" class="enquire">Enquire <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
+          <!-- Service 3 -->
+          <article class="service-card fade-up">
+            <svg class="service-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+              <rect x="4" y="10" width="32" height="20" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4 16h32M12 10v20M28 10v20" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+            </svg>
+            <h3>Cinematic AI Videos</h3>
+            <p>Story-driven visuals with film-style mood, atmosphere, and intentional pacing for premium brands.</p>
+            <a href="#contact" class="enquire">Enquire <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
+          <!-- Service 4 -->
+          <article class="service-card fade-up">
+            <svg class="service-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+              <rect x="12" y="4" width="16" height="32" rx="3" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="20" cy="30" r="2" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+            <h3>Short-Form Reels</h3>
+            <p>Vertical content optimised for Instagram, TikTok, and YouTube Shorts—engaging and platform-native.</p>
+            <a href="#contact" class="enquire">Enquire <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
+          <!-- Service 5: Graphic Design -->
+          <article class="service-card fade-up">
+            <svg class="service-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+              <path d="M8 28l12-20 4 8 4-6 4 18H8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M26 10l6 2-4 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="10" y="24" width="8" height="6" rx="1" stroke="currentColor" stroke-width="1.2" opacity="0.6"/>
+            </svg>
+            <h3>Graphic Design</h3>
+            <p>Brand-ready visuals that match the look of the videos—social posts and stories, ad creatives, thumbnails, covers, posters, banners, and brand-style assets.</p>
+            <a href="#contact" class="enquire">Enquire <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== COMPLETE CONTENT PACKAGE ========== -->
+    <section class="package-strip" id="package" aria-labelledby="package-heading">
+      <div class="container">
+        <div class="package-inner fade-up">
+          <span class="label section-label">Complete Content Package</span>
+          <h2 id="package-heading">One Look. Every Platform.</h2>
+          <p>Video and graphic design created together, so your thumbnails, posts, and ads all feel like one brand.</p>
+          <a href="#contact" class="btn btn-outline">Discuss Your Project</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PORTFOLIO ========== -->
+    <section class="portfolio" id="portfolio" aria-labelledby="portfolio-heading">
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="label section-label">Portfolio</span>
+          <h2 id="portfolio-heading">Selected work</h2>
+          <p>A selection of AI-crafted video and design work. More samples are being added.</p>
+          <div class="hairline" style="margin-top: 1.25rem;"></div>
+        </div>
+
+        <div class="filters fade-up" role="group" aria-label="Filter portfolio">
+          <button class="filter-chip active" data-filter="all">All</button>
+          <button class="filter-chip" data-filter="ugc">UGC Ads</button>
+          <button class="filter-chip" data-filter="product">Product Ads</button>
+          <button class="filter-chip" data-filter="cinematic">Cinematic</button>
+          <button class="filter-chip" data-filter="reels">Reels</button>
+          <button class="filter-chip" data-filter="design">Graphic Design</button>
+        </div>
+
+        <div class="portfolio-grid" id="portfolio-grid">
+          <!-- Card 1: UGC -->
+          <!-- SWAP: Replace the .thumb contents with <iframe>, <video>, or YouTube/Vimeo embed -->
+          <article class="portfolio-card fade-up" data-category="ugc">
+            <div class="thumb">
+              <span class="badge">Sample coming soon</span>
+              <div class="play-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="card-cat">UGC Ads</p>
+              <h3>Sample Project 01</h3>
+              <p>Creator-style product showcase for social platforms.</p>
+            </div>
+          </article>
+
+          <!-- Card 2: Product — live sample -->
+          <!-- IMPORTANT: Keep portfolio-product-ad-01.mp4 and portfolio-product-ad-01-poster.jpg in the SAME folder as this HTML file -->
+          <article class="portfolio-card fade-up" data-category="product">
+            <div class="thumb vertical has-video">
+              <video
+                controls
+                playsinline
+                webkit-playsinline
+                preload="auto"
+                poster="portfolio-product-ad-01-poster.jpg"
+                aria-label="Enzyme cleanser product advertisement by Mannat">
+                <source src="portfolio-product-ad-01.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="card-body">
+              <p class="card-cat">Product Ads</p>
+              <h3>Enzyme Cleanser Product Ad</h3>
+              <p>Cinematic product advertisement for a deep-clean enzyme cleanser — vertical, brand-ready.</p>
+            </div>
+          </article>
+
+          <!-- Card 3: Cinematic -->
+          <!-- SWAP: Replace the .thumb contents with <iframe>, <video>, or YouTube/Vimeo embed -->
+          <article class="portfolio-card fade-up" data-category="cinematic">
+            <div class="thumb">
+              <span class="badge">Sample coming soon</span>
+              <div class="play-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="card-cat">Cinematic</p>
+              <h3>Sample Project 03</h3>
+              <p>Story-driven cinematic sequence with atmospheric mood.</p>
+            </div>
+          </article>
+
+          <!-- Card 4: Reels -->
+          <!-- SWAP: Replace the .thumb contents with <iframe>, <video>, or YouTube/Vimeo embed -->
+          <article class="portfolio-card fade-up" data-category="reels">
+            <div class="thumb vertical">
+              <span class="badge">Sample coming soon</span>
+              <div class="play-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="card-cat">Reels</p>
+              <h3>Sample Project 04</h3>
+              <p>Vertical short-form content optimised for Reels and Shorts.</p>
+            </div>
+          </article>
+
+          <!-- Card 5: UGC -->
+          <!-- SWAP: Replace the .thumb contents with <iframe>, <video>, or YouTube/Vimeo embed -->
+          <article class="portfolio-card fade-up" data-category="ugc">
+            <div class="thumb">
+              <span class="badge">Sample coming soon</span>
+              <div class="play-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="card-cat">UGC Ads</p>
+              <h3>Sample Project 05</h3>
+              <p>Authentic testimonial-style ad for lifestyle brands.</p>
+            </div>
+          </article>
+
+          <!-- Card 6: Cinematic -->
+          <!-- SWAP: Replace the .thumb contents with <iframe>, <video>, or YouTube/Vimeo embed -->
+          <article class="portfolio-card fade-up" data-category="cinematic">
+            <div class="thumb">
+              <span class="badge">Sample coming soon</span>
+              <div class="play-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="card-cat">Cinematic</p>
+              <h3>Sample Project 06</h3>
+              <p>Brand film-style narrative with cinematic lighting and tone.</p>
+            </div>
+          </article>
+
+          <!-- Design Card 1: Social Post (1:1) — sample concept, not client work -->
+          <article class="portfolio-card fade-up" data-category="design" data-lightbox-title="Social Media Post — Sample concept (placeholder text, not client work)">
+            <div class="thumb design square">
+              <span class="badge concept">Sample concept</span>
+              <svg class="design-sample" viewBox="0 0 400 400" role="img" aria-label="Square social media post sample concept">
+                <defs>
+                  <linearGradient id="ds1a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E1A33"/><stop offset="1" stop-color="#05070B"/></linearGradient>
+                  <radialGradient id="ds1g" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#D4AF37" stop-opacity=".55"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></radialGradient>
+                  <linearGradient id="ds1b" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F1D98A"/><stop offset="1" stop-color="#B8921F"/></linearGradient>
+                </defs>
+                <rect width="400" height="400" fill="url(#ds1a)"/>
+                <circle cx="270" cy="210" r="150" fill="url(#ds1g)"/>
+                <rect x="14" y="14" width="372" height="372" fill="none" stroke="#D4AF37" stroke-opacity=".6"/>
+                <text x="36" y="56" fill="#D4AF37" font-family="Inter, sans-serif" font-size="11" letter-spacing="4">YOUR BRAND</text>
+                <text x="36" y="150" fill="#F4F1EA" font-family="Cormorant Garamond, serif" font-size="52" font-weight="700">New</text>
+                <text x="36" y="200" fill="#F4F1EA" font-family="Cormorant Garamond, serif" font-size="52" font-weight="700">Collection</text>
+                <text x="36" y="236" fill="#9AA3B5" font-family="Inter, sans-serif" font-size="13">Launching soon. Tap to learn more.</text>
+                <rect x="36" y="262" width="130" height="38" rx="19" fill="url(#ds1b)"/>
+                <text x="101" y="286" text-anchor="middle" fill="#05070B" font-family="Inter, sans-serif" font-size="12" font-weight="600" letter-spacing="1">SHOP NOW</text>
+                <rect x="250" y="130" width="40" height="30" rx="4" fill="url(#ds1b)"/>
+                <rect x="236" y="160" width="68" height="130" rx="14" fill="#F4F1EA" fill-opacity=".92"/>
+                <rect x="248" y="200" width="44" height="50" rx="4" fill="none" stroke="#B8921F"/>
+                <text x="270" y="230" text-anchor="middle" fill="#B8921F" font-family="Cormorant Garamond, serif" font-size="14" font-weight="700">BRAND</text>
+              </svg>
+            </div>
+            <div class="card-body">
+              <p class="card-cat">Social Post</p>
+              <h3>Social Media Post</h3>
+              <p>1:1 product announcement layout. Placeholder text — sample concept only.</p>
+            </div>
+          </article>
+
+          <!-- Design Card 2: Video Thumbnail (16:9) — sample concept -->
+          <article class="portfolio-card fade-up" data-category="design" data-lightbox-title="Video Thumbnail — Sample concept (placeholder text, not client work)">
+            <div class="thumb design landscape">
+              <span class="badge concept">Sample concept</span>
+              <svg class="design-sample" viewBox="0 0 640 360" role="img" aria-label="Video thumbnail sample concept">
+                <defs>
+                  <linearGradient id="ds2a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#05070B"/><stop offset=".6" stop-color="#0E1A33"/><stop offset="1" stop-color="#1B2C57"/></linearGradient>
+                  <radialGradient id="ds2g" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#D4AF37" stop-opacity=".5"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></radialGradient>
+                </defs>
+                <rect width="640" height="360" fill="url(#ds2a)"/>
+                <circle cx="480" cy="180" r="170" fill="url(#ds2g)"/>
+                <g fill="none" stroke="#D4AF37" stroke-opacity=".35"><circle cx="480" cy="180" r="110"/><circle cx="480" cy="180" r="70"/></g>
+                <circle cx="480" cy="180" r="44" fill="#D4AF37"/>
+                <path d="M468 158l36 22-36 22z" fill="#05070B"/>
+                <rect x="40" y="52" width="150" height="28" rx="14" fill="#D4AF37"/>
+                <text x="115" y="71" text-anchor="middle" fill="#05070B" font-family="Inter, sans-serif" font-size="12" font-weight="600" letter-spacing="2">AI VIDEO</text>
+                <text x="40" y="150" fill="#F4F1EA" font-family="Cormorant Garamond, serif" font-size="56" font-weight="700">How It's</text>
+                <text x="40" y="210" fill="#F1D98A" font-family="Cormorant Garamond, serif" font-size="56" font-weight="700">Made.</text>
+                <text x="40" y="256" fill="#9AA3B5" font-family="Inter, sans-serif" font-size="16">Behind the scenes of an AI-powered ad</text>
+                <rect x="40" y="290" width="90" height="4" fill="#D4AF37"/>
+                <rect x="566" y="320" width="56" height="22" rx="4" fill="#000" fill-opacity=".8"/>
+                <text x="594" y="336" text-anchor="middle" fill="#fff" font-family="Inter, sans-serif" font-size="12">0:45</text>
+              </svg>
+            </div>
+            <div class="card-body">
+              <p class="card-cat">Thumbnail</p>
+              <h3>Video Thumbnail</h3>
+              <p>16:9 cover for YouTube or portfolio video cards. Sample concept only.</p>
+            </div>
+          </article>
+
+          <!-- Design Card 3: Event Poster (4:5) — sample concept -->
+          <article class="portfolio-card fade-up" data-category="design" data-lightbox-title="Event Poster — Sample concept (placeholder text, not client work)">
+            <div class="thumb design portrait">
+              <span class="badge concept">Sample concept</span>
+              <svg class="design-sample" viewBox="0 0 400 500" role="img" aria-label="Event poster sample concept">
+                <defs>
+                  <linearGradient id="ds3a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A1226"/><stop offset="1" stop-color="#05070B"/></linearGradient>
+                  <radialGradient id="ds3g" cx=".5" cy=".4" r=".6"><stop offset="0" stop-color="#D4AF37" stop-opacity=".35"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></radialGradient>
+                </defs>
+                <rect width="400" height="500" fill="url(#ds3a)"/>
+                <rect width="400" height="500" fill="url(#ds3g)"/>
+                <rect x="20" y="20" width="360" height="460" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+                <rect x="28" y="28" width="344" height="444" fill="none" stroke="#D4AF37" stroke-opacity=".4"/>
+                <text x="200" y="90" text-anchor="middle" fill="#D4AF37" font-family="Inter, sans-serif" font-size="12" letter-spacing="6">YOU ARE INVITED</text>
+                <line x1="150" y1="108" x2="250" y2="108" stroke="#D4AF37"/>
+                <text x="200" y="200" text-anchor="middle" fill="#F4F1EA" font-family="Cormorant Garamond, serif" font-size="68" font-weight="700">Grand</text>
+                <text x="200" y="268" text-anchor="middle" fill="#F1D98A" font-family="Cormorant Garamond, serif" font-size="68" font-weight="700">Opening</text>
+                <circle cx="200" cy="332" r="26" fill="none" stroke="#D4AF37"/>
+                <path d="M188 332l8 8 16-18" fill="none" stroke="#D4AF37" stroke-width="2"/>
+                <text x="200" y="402" text-anchor="middle" fill="#F4F1EA" font-family="Inter, sans-serif" font-size="14">DATE · TIME · LOCATION</text>
+                <text x="200" y="432" text-anchor="middle" fill="#9AA3B5" font-family="Inter, sans-serif" font-size="12">Your Brand Name Here</text>
+              </svg>
+            </div>
+            <div class="card-body">
+              <p class="card-cat">Poster</p>
+              <h3>Event Poster</h3>
+              <p>4:5 elegant invitation or promo poster. Sample concept only.</p>
+            </div>
+          </article>
+
+          <!-- Design Card 4: Story / Reel Ad (9:16) — sample concept -->
+          <article class="portfolio-card fade-up" data-category="design" data-lightbox-title="Story / Reel Ad Creative — Sample concept (placeholder text, not client work)">
+            <div class="thumb design story-ratio">
+              <span class="badge concept">Sample concept</span>
+              <svg class="design-sample" viewBox="0 0 270 480" role="img" aria-label="Story ad creative sample concept">
+                <defs>
+                  <linearGradient id="ds4a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B2C57"/><stop offset=".55" stop-color="#0A1226"/><stop offset="1" stop-color="#05070B"/></linearGradient>
+                  <radialGradient id="ds4g" cx=".5" cy=".38" r=".5"><stop offset="0" stop-color="#D4AF37" stop-opacity=".5"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></radialGradient>
+                </defs>
+                <rect width="270" height="480" fill="url(#ds4a)"/>
+                <rect width="270" height="480" fill="url(#ds4g)"/>
+                <text x="135" y="60" text-anchor="middle" fill="#D4AF37" font-family="Inter, sans-serif" font-size="10" letter-spacing="5">YOUR BRAND</text>
+                <text x="135" y="170" text-anchor="middle" fill="#F4F1EA" font-family="Cormorant Garamond, serif" font-size="44" font-weight="700">Limited</text>
+                <text x="135" y="214" text-anchor="middle" fill="#F1D98A" font-family="Cormorant Garamond, serif" font-size="44" font-weight="700">Offer</text>
+                <circle cx="135" cy="290" r="48" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+                <text x="135" y="298" text-anchor="middle" fill="#F4F1EA" font-family="Cormorant Garamond, serif" font-size="26" font-weight="700">YOUR</text>
+                <text x="135" y="320" text-anchor="middle" fill="#D4AF37" font-family="Inter, sans-serif" font-size="10" letter-spacing="3">OFFER HERE</text>
+                <rect x="55" y="382" width="160" height="40" rx="20" fill="#D4AF37"/>
+                <text x="135" y="407" text-anchor="middle" fill="#05070B" font-family="Inter, sans-serif" font-size="12" font-weight="600" letter-spacing="2">SWIPE UP</text>
+                <path d="M127 450l8-8 8 8" fill="none" stroke="#D4AF37" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="card-body">
+              <p class="card-cat">Ad Creative</p>
+              <h3>Story / Reel Ad</h3>
+              <p>9:16 vertical layout with a clear call to action. Sample concept only.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Featured External Reference -->
+        <div class="featured-ref fade-up">
+          <div>
+            <p class="ref-label">External Creative Reference</p>
+            <h3>Inspiration from Instagram</h3>
+            <p>Shown as inspiration only. This is not a video created by Mannat.</p>
+          </div>
+          <a href="https://www.instagram.com/reel/DeMuSsTiKfb/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View Reference on Instagram</a>
+        </div>
+
+        <p class="portfolio-note fade-up">Graphic design layouts above are sample concepts with placeholder text—not client work. Original samples are being added. Contact me for a custom demo.</p>
+      </div>
+    </section>
+
+    <!-- ========== WHY WORK WITH ME ========== -->
+    <section class="why" id="why" aria-labelledby="why-heading">
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="label section-label">Collaboration</span>
+          <h2 id="why-heading">Why work with me</h2>
+          <div class="hairline" style="margin-top: 1.25rem;"></div>
+        </div>
+        <div class="why-grid">
+          <div class="why-item fade-up">
+            <p class="num">01</p>
+            <h3>Remote-first</h3>
+            <p>Seamless collaboration across time zones for clients worldwide.</p>
+          </div>
+          <div class="why-item fade-up">
+            <p class="num">02</p>
+            <h3>Clear communication</h3>
+            <p>Straightforward updates and feedback loops at every stage.</p>
+          </div>
+          <div class="why-item fade-up">
+            <p class="num">03</p>
+            <h3>Flexible formats</h3>
+            <p>Deliverables tailored for each platform—horizontal, vertical, or both.</p>
+          </div>
+          <div class="why-item fade-up">
+            <p class="num">04</p>
+            <h3>Fast turnaround</h3>
+            <p>Efficient process designed for timely delivery without sacrificing quality.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section class="contact" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="contact-layout">
+          <div class="contact-info fade-up">
+            <span class="label section-label">Contact</span>
+            <h2 id="contact-heading">Let's create something</h2>
+            <p class="muted" style="margin-top: 0.75rem;">Tell me about your project. I'll respond with next steps.</p>
+            <div class="contact-details">
+              <div class="contact-detail">
+                <span>Name</span>
+                <p>Mannat</p>
+              </div>
+              <div class="contact-detail">
+                <span>Email</span>
+                <a href="mailto:mannatkohli200@gmail.com">mannatkohli200@gmail.com</a>
+              </div>
+              <div class="contact-detail">
+                <span>Phone</span>
+                <a href="tel:+917087364633">+91 70873 64633</a>
+              </div>
+              <div class="contact-detail">
+                <span>Location</span>
+                <p>India</p>
+              </div>
+            </div>
+            <div class="availability">
+              Available for international clients. Replies within 24 to 48 hours.
+            </div>
+          </div>
+
+          <div class="form-card fade-up">
+            <!--
+              FORM SETUP: This form builds a mailto: link with prefilled subject and body.
+              To switch to Formspree: set form action to your Formspree endpoint and method="POST".
+              To switch to Netlify Forms: add netlify attribute and a form-name input.
+            -->
+            <form id="contact-form" novalidate>
+              <div class="form-message" id="form-message" role="alert" aria-live="polite"></div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" name="name" required autocomplete="name" placeholder="Your name" />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@company.com" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="project-type">Project Type</label>
+                  <select id="project-type" name="project-type" required>
+                    <option value="" disabled selected>Select a service</option>
+                    <option value="AI UGC-Style Ads">AI UGC-Style Ads</option>
+                    <option value="AI Product Advertisement">AI Product Advertisement</option>
+                    <option value="Cinematic AI Video">Cinematic AI Video</option>
+                    <option value="Short-Form Reels">Short-Form Reels</option>
+                    <option value="Graphic Design">Graphic Design</option>
+                    <option value="Video + Graphic Design Bundle">Video + Graphic Design Bundle</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="budget">Budget Range <span class="muted">(optional)</span></label>
+                  <select id="budget" name="budget">
+                    <option value="" selected>Prefer not to say</option>
+                    <option value="Under $500">Under $500</option>
+                    <option value="$500 – $1,500">$500 – $1,500</option>
+                    <option value="$1,500 – $3,000">$1,500 – $3,000</option>
+                    <option value="$3,000+">$3,000+</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required placeholder="Briefly describe your project, goals, and timeline..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== LIGHTBOX (for design samples when images are added) ========== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview" hidden>
+    <div class="lightbox-inner">
+      <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
+      <img id="lightbox-img" src="" alt="" />
+      <p class="lightbox-caption" id="lightbox-caption"></p>
+    </div>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-inner">
+      <a href="#home" class="wordmark">MANNAT</a>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="footer-contact">
+        <a href="mailto:mannatkohli200@gmail.com">mannatkohli200@gmail.com</a>
+        <a href="tel:+917087364633">+91 70873 64633</a>
+      </div>
+      <p class="copyright">&copy; 2026 Mannat. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      /* ----- Sticky nav blur on scroll ----- */
+      const nav = document.getElementById("nav");
+      const onScroll = () => {
+        nav.classList.toggle("scrolled", window.scrollY > 40);
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+
+      /* ----- Letterbox reveal on load ----- */
+      const topBar = document.getElementById("letterbox-top");
+      const bottomBar = document.getElementById("letterbox-bottom");
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        requestAnimationFrame(() => {
+          topBar.classList.add("reveal");
+          bottomBar.classList.add("reveal");
+        });
+      }
+
+      /* ----- Mobile menu ----- */
+      const hamburger = document.getElementById("hamburger");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const toggleMenu = (open) => {
+        const isOpen = open !== undefined ? open : !mobileMenu.classList.contains("open");
+        mobileMenu.classList.toggle("open", isOpen);
+        hamburger.classList.toggle("active", isOpen);
+        hamburger.setAttribute("aria-expanded", String(isOpen));
+        hamburger.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+        document.body.style.overflow = isOpen ? "hidden" : "";
+      };
+      hamburger.addEventListener("click", () => toggleMenu());
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => toggleMenu(false));
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && mobileMenu.classList.contains("open")) toggleMenu(false);
+      });
+
+      /* ----- Smooth anchor scroll (handles fixed nav offset) ----- */
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", (e) => {
+          const id = anchor.getAttribute("href");
+          if (id === "#") return;
+          const target = document.querySelector(id);
+          if (target) {
+            e.preventDefault();
+            const offset = nav.offsetHeight + 8;
+            const top = target.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top, behavior: "smooth" });
+          }
+        });
+      });
+
+      /* ----- Fade-up on scroll (IntersectionObserver) ----- */
+      const fadeEls = document.querySelectorAll(".fade-up");
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+        );
+        fadeEls.forEach((el) => observer.observe(el));
+      } else {
+        fadeEls.forEach((el) => el.classList.add("visible"));
+      }
+
+      /* ----- Portfolio filter ----- */
+      const chips = document.querySelectorAll(".filter-chip");
+      const cards = document.querySelectorAll(".portfolio-card");
+      chips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          chips.forEach((c) => c.classList.remove("active"));
+          chip.classList.add("active");
+          const filter = chip.dataset.filter;
+          cards.forEach((card) => {
+            const match = filter === "all" || card.dataset.category === filter;
+            card.classList.toggle("hidden", !match);
+          });
+        });
+      });
+
+      /* ----- Contact form: mailto with validation ----- */
+      const form = document.getElementById("contact-form");
+      const formMsg = document.getElementById("form-message");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        formMsg.className = "form-message";
+        formMsg.textContent = "";
+
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const projectType = form["project-type"].value;
+        const budget = form.budget.value;
+        const message = form.message.value.trim();
+
+        if (!name || !email || !projectType || !message) {
+          formMsg.className = "form-message error";
+          formMsg.textContent = "Please fill in all required fields.";
+          return;
+        }
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (!emailOk) {
+          formMsg.className = "form-message error";
+          formMsg.textContent = "Please enter a valid email address.";
+          return;
+        }
+
+        const subject = encodeURIComponent(`Portfolio Enquiry — ${projectType} — ${name}`);
+        let body = `Name: ${name}\nEmail: ${email}\nProject Type: ${projectType}`;
+        if (budget) body += `\nBudget Range: ${budget}`;
+        body += `\n\nMessage:\n${message}`;
+        const mailto = `mailto:mannatkohli200@gmail.com?subject=${subject}&body=${encodeURIComponent(body)}`;
+
+        formMsg.className = "form-message success";
+        formMsg.textContent = "Opening your email client… If nothing opens, email mannatkohli200@gmail.com directly.";
+        window.location.href = mailto;
+      });
+
+      /* ----- Lightbox for design portfolio samples (SVG or img) ----- */
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+      const lightboxCaption = document.getElementById("lightbox-caption");
+      const lightboxClose = document.getElementById("lightbox-close");
+      const lightboxInner = lightbox.querySelector(".lightbox-inner");
+      let lastFocus = null;
+
+      const clearLightboxMedia = () => {
+        lightboxImg.removeAttribute("src");
+        lightboxImg.style.display = "";
+        const oldSvg = lightboxInner.querySelector("svg.lightbox-svg");
+        if (oldSvg) oldSvg.remove();
+      };
+
+      const openLightboxFromCard = (card) => {
+        lastFocus = document.activeElement;
+        clearLightboxMedia();
+        const title = card.dataset.lightboxTitle || "";
+        lightboxCaption.textContent = title;
+
+        const img = card.querySelector("img[data-full], img");
+        const svg = card.querySelector("svg.design-sample");
+
+        if (img) {
+          lightboxImg.style.display = "block";
+          lightboxImg.src = img.getAttribute("data-full") || img.src;
+          lightboxImg.alt = img.alt || title;
+        } else if (svg) {
+          lightboxImg.style.display = "none";
+          const clone = svg.cloneNode(true);
+          clone.classList.add("lightbox-svg");
+          clone.removeAttribute("class");
+          clone.classList.add("lightbox-svg");
+          clone.style.width = "min(100%, 640px)";
+          clone.style.height = "auto";
+          clone.style.maxHeight = "85vh";
+          lightboxInner.insertBefore(clone, lightboxCaption);
+        } else {
+          return;
+        }
+
+        lightbox.hidden = false;
+        requestAnimationFrame(() => lightbox.classList.add("open"));
+        lightboxClose.focus();
+        document.body.style.overflow = "hidden";
+      };
+
+      const closeLightbox = () => {
+        lightbox.classList.remove("open");
+        document.body.style.overflow = "";
+        setTimeout(() => {
+          lightbox.hidden = true;
+          clearLightboxMedia();
+          if (lastFocus) lastFocus.focus();
+        }, 300);
+      };
+
+      document.querySelectorAll('.portfolio-card[data-category="design"]').forEach((card) => {
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("role", "button");
+        const activate = () => openLightboxFromCard(card);
+        card.addEventListener("click", activate);
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            activate();
+          }
+        });
+      });
+      lightboxClose.addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightbox.classList.contains("open")) closeLightbox();
+      });
+    })();
+  </script>
+</body>
+</html>
