@@ -539,104 +539,38 @@
         grid-column: span 2;
       }
       .services-grid .service-card:nth-child(4),
-      .services-grid .service-card:nth-child(5) {
-        grid-column: span 3;
+      .services-grid .service-card:nth-child(5),
+      .services-grid .service-card:nth-child(6) {
+        grid-column: span 2;
       }
     }
-    /* Package strip */
-    .package-strip {
-      padding: var(--space-xl) 0;
-      background: linear-gradient(180deg, var(--bg-near-black) 0%, var(--bg-deep-navy) 50%, var(--bg-near-black) 100%);
-    }
-    .package-inner {
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 2.5rem 1.5rem;
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      border-radius: var(--radius-lg);
-      background: linear-gradient(160deg, rgba(14, 26, 51, 0.8) 0%, rgba(10, 18, 38, 0.9) 100%);
-      position: relative;
-    }
-    .package-inner::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 10%;
-      right: 10%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      opacity: 0.5;
-    }
-    .package-inner h2 {
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      margin-bottom: 0.75rem;
-    }
-    .package-inner p {
-      color: var(--muted);
-      margin-bottom: 1.75rem;
-      font-size: 1.05rem;
-    }
     .service-card {
-      background: linear-gradient(160deg, var(--bg-navy) 0%, var(--bg-deep-navy) 100%);
+      background: var(--bg-navy);
       border: 1px solid rgba(212, 175, 55, 0.12);
       border-radius: var(--radius-lg);
       padding: 1.75rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-    .service-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      opacity: 0;
-      transition: opacity var(--transition);
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
     }
     .service-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(212, 175, 55, 0.4);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(212, 175, 55, 0.08);
+      border-color: rgba(212, 175, 55, 0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.35);
     }
-    .service-card:hover::before { opacity: 1; }
-    .service-icon {
+    .service-card .icon {
       width: 40px;
       height: 40px;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1rem;
       color: var(--gold);
     }
     .service-card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.65rem;
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
       color: var(--ivory);
     }
     .service-card p {
       font-size: 0.9rem;
       color: var(--muted);
-      flex-grow: 1;
-      margin-bottom: 1.25rem;
-    }
-    .service-card .enquire {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: gap var(--transition);
-    }
-    .service-card .enquire:hover { gap: 0.65rem; }
-    .service-card .enquire svg {
-      width: 14px;
-      height: 14px;
+      line-height: 1.55;
     }
 
     /* ========== PORTFOLIO ========== */
@@ -648,34 +582,31 @@
       flex-wrap: wrap;
       gap: 0.6rem;
       justify-content: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: var(--space-xl);
     }
     .filter-chip {
-      padding: 0.5rem 1.15rem;
-      border: 1px solid rgba(154, 163, 181, 0.3);
+      padding: 0.5rem 1.1rem;
+      border: 1px solid rgba(212, 175, 55, 0.3);
       border-radius: 100px;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 500;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--muted);
       cursor: pointer;
       transition: all var(--transition);
-      min-height: 40px;
+      min-height: 36px;
     }
-    .filter-chip:hover {
-      border-color: var(--gold);
-      color: var(--gold-light);
-    }
+    .filter-chip:hover,
     .filter-chip.active {
-      background: rgba(212, 175, 55, 0.15);
+      background: var(--gold);
+      color: var(--bg-near-black);
       border-color: var(--gold);
-      color: var(--gold);
     }
     .portfolio-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1.5rem;
+      gap: 1.75rem;
     }
     @media (min-width: 640px) {
       .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
@@ -685,391 +616,128 @@
     }
     .portfolio-card {
       background: var(--bg-navy);
-      border: 1px solid rgba(212, 175, 55, 0.1);
       border-radius: var(--radius-lg);
       overflow: hidden;
-      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
-      position: relative;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
     }
     .portfolio-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(212, 175, 55, 0.35);
-      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.35), 0 0 24px rgba(212, 175, 55, 0.06);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+      border-color: rgba(212, 175, 55, 0.25);
     }
-    .portfolio-card.hidden { display: none; }
     .thumb {
-      aspect-ratio: 16 / 9;
-      background: linear-gradient(145deg, #0E1A33 0%, #05070B 60%, #0A1226 100%);
       position: relative;
+      aspect-ratio: 16/9;
+      background: #0A1226;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
     }
     .thumb.vertical {
-      aspect-ratio: 9 / 16;
-      max-height: 480px;
+      aspect-ratio: 9/16;
+      max-height: 420px;
     }
-    .thumb.has-video {
-      background: #0A1226;
-    }
-    .thumb.has-video::before,
-    .thumb.has-video::after {
-      display: none;
-    }
-    .thumb video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      background: #0A1226;
-    }
-    .thumb video:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: -2px;
-    }
-    /* Film frame motif */
-    .thumb::before {
-      content: "";
-      position: absolute;
-      inset: 8px;
-      border: 1px solid rgba(212, 175, 55, 0.15);
-      pointer-events: none;
-      z-index: 1;
-    }
-    .thumb::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: repeating-linear-gradient(
-        90deg,
-        transparent 0,
-        transparent 8px,
-        rgba(212, 175, 55, 0.2) 8px,
-        rgba(212, 175, 55, 0.2) 12px
-      );
-      opacity: 0.5;
-      z-index: 1;
-    }
-    .play-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(212, 175, 55, 0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold);
-      transition: transform var(--transition), border-color var(--transition), background var(--transition);
-      position: relative;
-      z-index: 1;
-    }
-    .portfolio-card:hover .play-icon {
-      transform: scale(1.08);
-      border-color: var(--gold);
-      background: rgba(212, 175, 55, 0.1);
-    }
-    .play-icon svg {
-      width: 18px;
-      height: 18px;
-      margin-left: 2px;
-    }
-    .badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      padding: 0.3rem 0.65rem;
-      background: rgba(5, 7, 11, 0.85);
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      border-radius: 4px;
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      z-index: 2;
-    }
-    .card-body {
-      padding: 1.15rem 1.25rem 1.35rem;
-    }
-    .card-cat {
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.35rem;
-    }
-    .card-body h3 {
-      font-size: 1.15rem;
-      margin-bottom: 0.35rem;
-      color: var(--ivory);
-    }
-    .card-body p {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-    /* Design portfolio cards */
-    .thumb.design {
-      background: linear-gradient(145deg, #0E1A33 0%, #05070B 55%, #0A1226 100%);
-      border: 1px solid rgba(212, 175, 55, 0.2);
-    }
-    .thumb.square { aspect-ratio: 1 / 1; }
-    .thumb.portrait { aspect-ratio: 4 / 5; max-height: 360px; }
-    .thumb.landscape { aspect-ratio: 16 / 9; }
-    .thumb.design .design-sample {
-      width: 100%;
-      height: 100%;
-      display: block;
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .portfolio-card:hover .thumb.design .design-sample {
-      transform: scale(1.04);
-    }
-    .thumb.design img {
+    .thumb.has-video video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
+    }
+    .thumb .badge {
       position: absolute;
-      inset: 0;
-      z-index: 0;
-      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .portfolio-card:hover .thumb.design img {
-      transform: scale(1.05);
-    }
-    .portfolio-card[data-category="design"] {
-      cursor: pointer;
-    }
-    .badge.concept {
-      border-color: rgba(212, 175, 55, 0.5);
+      top: 12px;
+      left: 12px;
+      background: rgba(5,7,11,0.75);
       color: var(--gold);
-    }
-    .thumb.story-ratio {
-      aspect-ratio: 9 / 16;
-      max-height: 420px;
-    }
-    .lightbox-inner svg {
-      max-width: 100%;
-      max-height: 85vh;
-      display: block;
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      border-radius: var(--radius);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-      background: var(--bg-near-black);
-    }
-    /* Lightbox */
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      z-index: 2000;
-      background: rgba(5, 7, 11, 0.92);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity var(--transition), visibility var(--transition);
-    }
-    .lightbox.open {
-      opacity: 1;
-      visibility: visible;
-    }
-    .lightbox-inner {
-      position: relative;
-      max-width: min(960px, 100%);
-      max-height: 90vh;
-    }
-    .lightbox-inner img {
-      max-width: 100%;
-      max-height: 85vh;
-      display: block;
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      border-radius: var(--radius);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    }
-    .lightbox-close {
-      position: absolute;
-      top: -2.5rem;
-      right: 0;
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold);
-      font-size: 1.5rem;
-      cursor: pointer;
-      background: transparent;
-      border: 1px solid rgba(212, 175, 55, 0.35);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.7rem;
       border-radius: 4px;
-      transition: background var(--transition);
+      z-index: 2;
     }
-    .lightbox-close:hover,
-    .lightbox-close:focus-visible {
-      background: rgba(212, 175, 55, 0.15);
-    }
-    .lightbox-caption {
-      text-align: center;
-      margin-top: 1rem;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-    /* Featured external reference */
-    .featured-ref {
-      margin-top: 2.5rem;
-      background: linear-gradient(135deg, var(--bg-navy) 0%, var(--bg-deep-navy) 100%);
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      border-radius: var(--radius-lg);
-      padding: 1.75rem 1.5rem;
+    .thumb .play-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(212,175,55,0.2);
+      border: 1.5px solid var(--gold);
       display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      align-items: flex-start;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
     }
-    @media (min-width: 640px) {
-      .featured-ref {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1.75rem 2rem;
-      }
+    .thumb .play-icon svg { width: 20px; height: 20px; margin-left: 2px; }
+    .card-body {
+      padding: 1.25rem 1.35rem 1.5rem;
     }
-    .featured-ref .ref-label {
-      font-size: 0.7rem;
-      font-weight: 600;
+    .card-cat {
+      font-size: 0.65rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 0.35rem;
-    }
-    .featured-ref h3 {
-      font-size: 1.2rem;
       margin-bottom: 0.4rem;
     }
-    .featured-ref p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      max-width: 480px;
+    .card-body h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.4rem;
+      color: var(--ivory);
     }
-    .portfolio-note {
-      text-align: center;
-      margin-top: 2.5rem;
-      font-size: 0.95rem;
+    .card-body p {
+      font-size: 0.875rem;
       color: var(--muted);
+      line-height: 1.5;
     }
 
-    /* ========== WHY WORK WITH ME ========== */
-    .why {
+    /* Design samples */
+    .thumb.design { background: #0A1226; }
+    .thumb.design.square { aspect-ratio: 1; }
+    .design-sample { width: 100%; height: 100%; }
+
+    /* ========== PROCESS ========== */
+    .process {
       background: var(--bg-near-black);
     }
-    .why-grid {
+    .process-steps {
       display: grid;
       grid-template-columns: 1fr;
       gap: 1.5rem;
-      max-width: 900px;
-      margin: 0 auto;
+      counter-reset: step;
     }
-    @media (min-width: 640px) {
-      .why-grid { grid-template-columns: repeat(2, 1fr); }
+    @media (min-width: 768px) {
+      .process-steps { grid-template-columns: repeat(4, 1fr); }
     }
-    @media (min-width: 900px) {
-      .why-grid { grid-template-columns: repeat(4, 1fr); }
-    }
-    .why-item {
+    .process-step {
       text-align: center;
-      padding: 1.5rem 1rem;
+      position: relative;
     }
-    .why-item .num {
+    .process-step::before {
+      counter-increment: step;
+      content: counter(step, decimal-leading-zero);
+      display: block;
       font-family: var(--font-serif);
-      font-size: 1.75rem;
+      font-size: 2rem;
       color: var(--gold);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
       opacity: 0.7;
     }
-    .why-item h3 {
-      font-size: 1.05rem;
+    .process-step h3 {
+      font-size: 1.1rem;
       margin-bottom: 0.5rem;
-      color: var(--ivory);
     }
-    .why-item p {
-      font-size: 0.875rem;
+    .process-step p {
+      font-size: 0.9rem;
       color: var(--muted);
     }
 
     /* ========== CONTACT ========== */
     .contact {
-      background: linear-gradient(180deg, var(--bg-near-black) 0%, var(--bg-deep-navy) 50%, var(--bg-near-black) 100%);
+      background: linear-gradient(180deg, var(--bg-near-black) 0%, var(--bg-deep-navy) 100%);
     }
-    .contact-layout {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
-    }
-    @media (min-width: 900px) {
-      .contact-layout {
-        grid-template-columns: 1fr 1.4fr;
-        gap: 4rem;
-        align-items: start;
-      }
-    }
-    .contact-info h2 { text-align: left; }
-    .contact-info .section-label { text-align: left; }
-    .contact-details {
-      margin-top: 1.75rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.15rem;
-    }
-    .contact-detail {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-    }
-    .contact-detail span {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-    .contact-detail a,
-    .contact-detail p {
-      font-size: 1.05rem;
-      color: var(--ivory);
-      transition: color var(--transition);
-    }
-    .contact-detail a:hover,
-    .contact-detail a:focus-visible {
-      color: var(--gold);
-    }
-    .availability {
-      margin-top: 2rem;
-      padding: 1rem 1.25rem;
-      border-left: 2px solid var(--gold);
-      background: rgba(212, 175, 55, 0.05);
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-    .form-card {
-      background: linear-gradient(160deg, var(--bg-navy) 0%, var(--bg-deep-navy) 100%);
-      border: 1px solid rgba(212, 175, 55, 0.15);
-      border-radius: var(--radius-lg);
-      padding: 1.75rem 1.5rem;
-    }
-    @media (min-width: 640px) {
-      .form-card { padding: 2rem; }
+    .contact-form {
+      max-width: 560px;
+      margin: 0 auto;
     }
     .form-group {
       margin-bottom: 1.25rem;
@@ -1077,28 +745,21 @@
     .form-group label {
       display: block;
       font-size: 0.75rem;
-      font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 0.45rem;
+      margin-bottom: 0.5rem;
     }
     .form-group input,
     .form-group select,
     .form-group textarea {
       width: 100%;
       padding: 0.85rem 1rem;
-      background: rgba(5, 7, 11, 0.6);
-      border: 1px solid rgba(154, 163, 181, 0.25);
-      border-radius: 6px;
+      background: rgba(14,26,51,0.6);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: var(--radius);
       color: var(--ivory);
-      font-size: 0.95rem;
       transition: border-color var(--transition);
-      min-height: 48px;
-    }
-    .form-group textarea {
-      min-height: 120px;
-      resize: vertical;
     }
     .form-group input:focus,
     .form-group select:focus,
@@ -1106,93 +767,19 @@
       outline: none;
       border-color: var(--gold);
     }
-    .form-group select {
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%239AA3B5' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 1rem center;
-      padding-right: 2.5rem;
-    }
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
-    }
-    @media (min-width: 500px) {
-      .form-row { grid-template-columns: 1fr 1fr; }
-    }
-    .form-message {
-      display: none;
-      padding: 0.85rem 1rem;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-    }
-    .form-message.success {
-      display: block;
-      background: rgba(212, 175, 55, 0.12);
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      color: var(--gold-light);
-    }
-    .form-message.error {
-      display: block;
-      background: rgba(180, 60, 60, 0.12);
-      border: 1px solid rgba(180, 60, 60, 0.35);
-      color: #E8A0A0;
-    }
-    .form-card .btn-primary {
-      width: 100%;
-      margin-top: 0.5rem;
-    }
+    .form-group textarea { min-height: 140px; resize: vertical; }
 
     /* ========== FOOTER ========== */
-    .footer {
-      padding: 3rem 0 2rem;
-      border-top: 1px solid rgba(212, 175, 55, 0.12);
-      background: var(--bg-near-black);
-    }
-    .footer-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
+    footer {
+      padding: 2.5rem 0;
       text-align: center;
-    }
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.25rem;
-      justify-content: center;
-    }
-    .footer-links a {
-      font-size: 0.8rem;
+      border-top: 1px solid rgba(212,175,55,0.1);
       color: var(--muted);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      transition: color var(--transition);
+      font-size: 0.85rem;
     }
-    .footer-links a:hover,
-    .footer-links a:focus-visible { color: var(--gold); }
-    .footer-contact {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      justify-content: center;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-    .footer-contact a {
-      transition: color var(--transition);
-    }
-    .footer-contact a:hover,
-    .footer-contact a:focus-visible { color: var(--gold); }
-    .copyright {
-      font-size: 0.8rem;
-      color: var(--muted);
-      opacity: 0.7;
-    }
+    footer a { color: var(--gold); }
 
-    /* ========== UTILITIES ========== */
+    /* ========== UTILS ========== */
     .sr-only {
       position: absolute;
       width: 1px;
@@ -1200,781 +787,423 @@
       padding: 0;
       margin: -1px;
       overflow: hidden;
-      clip: rect(0, 0, 0, 0);
+      clip: rect(0,0,0,0);
       border: 0;
     }
   </style>
 </head>
 <body>
-  <!-- ========== NAVIGATION ========== -->
-  <header class="nav" id="nav" role="banner">
+  <!-- NAV -->
+  <nav class="nav" id="nav">
     <div class="nav-inner">
-      <a href="#home" class="wordmark" aria-label="MANNAT — Home">MANNAT</a>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="#home">Home</a>
+      <a href="#" class="wordmark">MANNAT</a>
+      <div class="nav-links">
         <a href="#about">About</a>
         <a href="#services">Services</a>
-        <a href="#portfolio">Portfolio</a>
+        <a href="#portfolio">Work</a>
+        <a href="#process">Process</a>
         <a href="#contact">Contact</a>
-      </nav>
+      </div>
       <a href="#contact" class="btn-hire">Hire Me</a>
-      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-        <span></span>
-        <span></span>
-        <span></span>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
       </button>
     </div>
-  </header>
+  </nav>
 
-  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile navigation">
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#contact">Contact</a>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#services" class="mobile-link">Services</a>
+    <a href="#portfolio" class="mobile-link">Work</a>
+    <a href="#process" class="mobile-link">Process</a>
+    <a href="#contact" class="mobile-link">Contact</a>
     <a href="#contact" class="btn-hire-mobile">Hire Me</a>
   </div>
 
-  <main>
-    <!-- ========== HERO ========== -->
-    <section class="hero" id="home" aria-label="Hero">
-      <div class="letterbox top" id="letterbox-top"></div>
-      <div class="letterbox bottom" id="letterbox-bottom"></div>
-      <div class="hero-content">
-        <p class="label">AI Video Creator</p>
-        <h1 class="hero-name">MANNAT</h1>
-        <p class="hero-headline">AI Video Creator &amp; Creative Content Specialist</p>
-        <p class="hero-tagline">Cinematic storytelling. AI-powered creativity.</p>
-        <div class="hero-ctas">
-          <a href="#portfolio" class="btn btn-primary">View My Work</a>
-          <a href="#contact" class="btn btn-outline">Contact Me</a>
-        </div>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="letterbox top"></div>
+    <div class="letterbox bottom"></div>
+    <div class="hero-content">
+      <p class="label">AI Video Creator</p>
+      <h1 class="hero-name">MANNAT</h1>
+      <p class="hero-headline">AI Video Creator & Creative Content Specialist</p>
+      <p class="hero-tagline">Cinematic storytelling. Brand-ready ads. International clients.</p>
+      <div class="hero-ctas">
+        <a href="#portfolio" class="btn btn-primary">View Work</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
       </div>
-      <div class="scroll-indicator" aria-hidden="true">
-        <div class="mouse"></div>
-        <span>Scroll</span>
-      </div>
-    </section>
-
-    <!-- ========== ABOUT ========== -->
-    <section class="about" id="about" aria-labelledby="about-heading">
-      <div class="container">
-        <div class="section-header fade-up">
-          <span class="label section-label">About</span>
-          <h2 id="about-heading">Crafting stories with AI</h2>
-          <div class="hairline" style="margin-top: 1.25rem;"></div>
-        </div>
-        <div class="about-content fade-up">
-          <p>
-            Mannat is an AI video creator focused on <strong>brand storytelling</strong>, AI UGC-style ads, product advertisements, cinematic AI videos, and short-form social media content.
-          </p>
-          <p>
-            Alongside video, Mannat also creates graphic design assets such as social media creatives, thumbnails, and promotional visuals so a brand's look stays consistent across every platform.
-          </p>
-          <p>
-            Working remotely with international brands and creators across the US, UK, UAE, Europe, and Australia, Mannat prioritises clear communication and fast turnaround—delivering polished, platform-ready work that feels intentional and on-brand.
-          </p>
-          <div class="focus-tags">
-            <span class="focus-tag">Brand Storytelling</span>
-            <span class="focus-tag">AI UGC Ads</span>
-            <span class="focus-tag">Product Ads</span>
-            <span class="focus-tag">Cinematic AI</span>
-            <span class="focus-tag">Short-Form Content</span>
-            <span class="focus-tag">Graphic Design</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== SERVICES ========== -->
-    <section class="services" id="services" aria-labelledby="services-heading">
-      <div class="container">
-        <div class="section-header fade-up">
-          <span class="label section-label">Services</span>
-          <h2 id="services-heading">What I create</h2>
-          <p>Video and design services tailored for brands, agencies, and creators.</p>
-          <div class="hairline" style="margin-top: 1.25rem;"></div>
-        </div>
-        <div class="services-grid">
-          <!-- Service 1 -->
-          <article class="service-card fade-up">
-            <svg class="service-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-              <rect x="6" y="10" width="28" height="20" rx="2" stroke="currentColor" stroke-width="1.5"/>
-              <circle cx="20" cy="20" r="5" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M14 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="1.5"/>
-            </svg>
-            <h3>AI UGC-Style Ads</h3>
-            <p>Authentic, creator-style ads designed for social platforms—natural, relatable, and built to convert.</p>
-            <a href="#contact" class="enquire">Enquire <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </article>
-          <!-- Service 2 -->
-          <article class="service-card fade-up">
-            <svg class="service-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-              <path d="M8 28L16 12l6 10 4-6 6 12H8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-              <circle cx="28" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/>
-            </svg>
-            <h3>AI Product Advertisements</h3>
-            <p>Polished, high-impact visuals that showcase products with clarity, style, and commercial appeal.</p>
-            <a href="#contact" class="enquire">Enquire <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </article>
-          <!-- Service 3 -->
-          <article class="service-card fade-up">
-            <svg class="service-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-              <rect x="4" y="10" width="32" height="20" rx="2" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M4 16h32M12 10v20M28 10v20" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
-            </svg>
-            <h3>Cinematic AI Videos</h3>
-            <p>Story-driven visuals with film-style mood, atmosphere, and intentional pacing for premium brands.</p>
-            <a href="#contact" class="enquire">Enquire <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </article>
-          <!-- Service 4 -->
-          <article class="service-card fade-up">
-            <svg class="service-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-              <rect x="12" y="4" width="16" height="32" rx="3" stroke="currentColor" stroke-width="1.5"/>
-              <circle cx="20" cy="30" r="2" stroke="currentColor" stroke-width="1.2"/>
-            </svg>
-            <h3>Short-Form Reels</h3>
-            <p>Vertical content optimised for Instagram, TikTok, and YouTube Shorts—engaging and platform-native.</p>
-            <a href="#contact" class="enquire">Enquire <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </article>
-          <!-- Service 5: Graphic Design -->
-          <article class="service-card fade-up">
-            <svg class="service-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-              <path d="M8 28l12-20 4 8 4-6 4 18H8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-              <path d="M26 10l6 2-4 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <rect x="10" y="24" width="8" height="6" rx="1" stroke="currentColor" stroke-width="1.2" opacity="0.6"/>
-            </svg>
-            <h3>Graphic Design</h3>
-            <p>Brand-ready visuals that match the look of the videos—social posts and stories, ad creatives, thumbnails, covers, posters, banners, and brand-style assets.</p>
-            <a href="#contact" class="enquire">Enquire <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== COMPLETE CONTENT PACKAGE ========== -->
-    <section class="package-strip" id="package" aria-labelledby="package-heading">
-      <div class="container">
-        <div class="package-inner fade-up">
-          <span class="label section-label">Complete Content Package</span>
-          <h2 id="package-heading">One Look. Every Platform.</h2>
-          <p>Video and graphic design created together, so your thumbnails, posts, and ads all feel like one brand.</p>
-          <a href="#contact" class="btn btn-outline">Discuss Your Project</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== PORTFOLIO ========== -->
-    <section class="portfolio" id="portfolio" aria-labelledby="portfolio-heading">
-      <div class="container">
-        <div class="section-header fade-up">
-          <span class="label section-label">Portfolio</span>
-          <h2 id="portfolio-heading">Selected work</h2>
-          <p>A selection of AI-crafted video and design work. More samples are being added.</p>
-          <div class="hairline" style="margin-top: 1.25rem;"></div>
-        </div>
-
-        <div class="filters fade-up" role="group" aria-label="Filter portfolio">
-          <button class="filter-chip active" data-filter="all">All</button>
-          <button class="filter-chip" data-filter="ugc">UGC Ads</button>
-          <button class="filter-chip" data-filter="product">Product Ads</button>
-          <button class="filter-chip" data-filter="cinematic">Cinematic</button>
-          <button class="filter-chip" data-filter="reels">Reels</button>
-          <button class="filter-chip" data-filter="design">Graphic Design</button>
-        </div>
-
-        <div class="portfolio-grid" id="portfolio-grid">
-          <!-- Card 1: UGC -->
-          <!-- SWAP: Replace the .thumb contents with <iframe>, <video>, or YouTube/Vimeo embed -->
-          <article class="portfolio-card fade-up" data-category="ugc">
-            <div class="thumb">
-              <span class="badge">Sample coming soon</span>
-              <div class="play-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </div>
-            <div class="card-body">
-              <p class="card-cat">UGC Ads</p>
-              <h3>Sample Project 01</h3>
-              <p>Creator-style product showcase for social platforms.</p>
-            </div>
-          </article>
-
-          <!-- Card 2: Product — live sample -->
-          <!-- IMPORTANT: Keep portfolio-product-ad-01.mp4 and portfolio-product-ad-01-poster.jpg in the SAME folder as this HTML file -->
-          <article class="portfolio-card fade-up" data-category="product">
-            <div class="thumb vertical has-video">
-              <video
-                controls
-                playsinline
-                webkit-playsinline
-                preload="auto"
-                poster="portfolio-product-ad-01-poster.jpg"
-                aria-label="Enzyme cleanser product advertisement by Mannat">
-                <source src="portfolio-product-ad-01.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-            <div class="card-body">
-              <p class="card-cat">Product Ads</p>
-              <h3>Enzyme Cleanser Product Ad</h3>
-              <p>Cinematic product advertisement for a deep-clean enzyme cleanser — vertical, brand-ready.</p>
-            </div>
-          </article>
-
-          <!-- Card 3: Cinematic -->
-          <!-- SWAP: Replace the .thumb contents with <iframe>, <video>, or YouTube/Vimeo embed -->
-          <article class="portfolio-card fade-up" data-category="cinematic">
-            <div class="thumb">
-              <span class="badge">Sample coming soon</span>
-              <div class="play-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </div>
-            <div class="card-body">
-              <p class="card-cat">Cinematic</p>
-              <h3>Sample Project 03</h3>
-              <p>Story-driven cinematic sequence with atmospheric mood.</p>
-            </div>
-          </article>
-
-          <!-- Card 4: Reels -->
-          <!-- SWAP: Replace the .thumb contents with <iframe>, <video>, or YouTube/Vimeo embed -->
-          <article class="portfolio-card fade-up" data-category="reels">
-            <div class="thumb vertical">
-              <span class="badge">Sample coming soon</span>
-              <div class="play-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </div>
-            <div class="card-body">
-              <p class="card-cat">Reels</p>
-              <h3>Sample Project 04</h3>
-              <p>Vertical short-form content optimised for Reels and Shorts.</p>
-            </div>
-          </article>
-
-          <!-- Card 5: UGC -->
-          <!-- SWAP: Replace the .thumb contents with <iframe>, <video>, or YouTube/Vimeo embed -->
-          <article class="portfolio-card fade-up" data-category="ugc">
-            <div class="thumb">
-              <span class="badge">Sample coming soon</span>
-              <div class="play-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </div>
-            <div class="card-body">
-              <p class="card-cat">UGC Ads</p>
-              <h3>Sample Project 05</h3>
-              <p>Authentic testimonial-style ad for lifestyle brands.</p>
-            </div>
-          </article>
-
-          <!-- Card 6: Cinematic -->
-          <!-- SWAP: Replace the .thumb contents with <iframe>, <video>, or YouTube/Vimeo embed -->
-          <article class="portfolio-card fade-up" data-category="cinematic">
-            <div class="thumb">
-              <span class="badge">Sample coming soon</span>
-              <div class="play-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </div>
-            <div class="card-body">
-              <p class="card-cat">Cinematic</p>
-              <h3>Sample Project 06</h3>
-              <p>Brand film-style narrative with cinematic lighting and tone.</p>
-            </div>
-          </article>
-
-          <!-- Design Card 1: Social Post (1:1) — sample concept, not client work -->
-          <article class="portfolio-card fade-up" data-category="design" data-lightbox-title="Social Media Post — Sample concept (placeholder text, not client work)">
-            <div class="thumb design square">
-              <span class="badge concept">Sample concept</span>
-              <svg class="design-sample" viewBox="0 0 400 400" role="img" aria-label="Square social media post sample concept">
-                <defs>
-                  <linearGradient id="ds1a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E1A33"/><stop offset="1" stop-color="#05070B"/></linearGradient>
-                  <radialGradient id="ds1g" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#D4AF37" stop-opacity=".55"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></radialGradient>
-                  <linearGradient id="ds1b" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F1D98A"/><stop offset="1" stop-color="#B8921F"/></linearGradient>
-                </defs>
-                <rect width="400" height="400" fill="url(#ds1a)"/>
-                <circle cx="270" cy="210" r="150" fill="url(#ds1g)"/>
-                <rect x="14" y="14" width="372" height="372" fill="none" stroke="#D4AF37" stroke-opacity=".6"/>
-                <text x="36" y="56" fill="#D4AF37" font-family="Inter, sans-serif" font-size="11" letter-spacing="4">YOUR BRAND</text>
-                <text x="36" y="150" fill="#F4F1EA" font-family="Cormorant Garamond, serif" font-size="52" font-weight="700">New</text>
-                <text x="36" y="200" fill="#F4F1EA" font-family="Cormorant Garamond, serif" font-size="52" font-weight="700">Collection</text>
-                <text x="36" y="236" fill="#9AA3B5" font-family="Inter, sans-serif" font-size="13">Launching soon. Tap to learn more.</text>
-                <rect x="36" y="262" width="130" height="38" rx="19" fill="url(#ds1b)"/>
-                <text x="101" y="286" text-anchor="middle" fill="#05070B" font-family="Inter, sans-serif" font-size="12" font-weight="600" letter-spacing="1">SHOP NOW</text>
-                <rect x="250" y="130" width="40" height="30" rx="4" fill="url(#ds1b)"/>
-                <rect x="236" y="160" width="68" height="130" rx="14" fill="#F4F1EA" fill-opacity=".92"/>
-                <rect x="248" y="200" width="44" height="50" rx="4" fill="none" stroke="#B8921F"/>
-                <text x="270" y="230" text-anchor="middle" fill="#B8921F" font-family="Cormorant Garamond, serif" font-size="14" font-weight="700">BRAND</text>
-              </svg>
-            </div>
-            <div class="card-body">
-              <p class="card-cat">Social Post</p>
-              <h3>Social Media Post</h3>
-              <p>1:1 product announcement layout. Placeholder text — sample concept only.</p>
-            </div>
-          </article>
-
-          <!-- Design Card 2: Video Thumbnail (16:9) — sample concept -->
-          <article class="portfolio-card fade-up" data-category="design" data-lightbox-title="Video Thumbnail — Sample concept (placeholder text, not client work)">
-            <div class="thumb design landscape">
-              <span class="badge concept">Sample concept</span>
-              <svg class="design-sample" viewBox="0 0 640 360" role="img" aria-label="Video thumbnail sample concept">
-                <defs>
-                  <linearGradient id="ds2a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#05070B"/><stop offset=".6" stop-color="#0E1A33"/><stop offset="1" stop-color="#1B2C57"/></linearGradient>
-                  <radialGradient id="ds2g" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#D4AF37" stop-opacity=".5"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></radialGradient>
-                </defs>
-                <rect width="640" height="360" fill="url(#ds2a)"/>
-                <circle cx="480" cy="180" r="170" fill="url(#ds2g)"/>
-                <g fill="none" stroke="#D4AF37" stroke-opacity=".35"><circle cx="480" cy="180" r="110"/><circle cx="480" cy="180" r="70"/></g>
-                <circle cx="480" cy="180" r="44" fill="#D4AF37"/>
-                <path d="M468 158l36 22-36 22z" fill="#05070B"/>
-                <rect x="40" y="52" width="150" height="28" rx="14" fill="#D4AF37"/>
-                <text x="115" y="71" text-anchor="middle" fill="#05070B" font-family="Inter, sans-serif" font-size="12" font-weight="600" letter-spacing="2">AI VIDEO</text>
-                <text x="40" y="150" fill="#F4F1EA" font-family="Cormorant Garamond, serif" font-size="56" font-weight="700">How It's</text>
-                <text x="40" y="210" fill="#F1D98A" font-family="Cormorant Garamond, serif" font-size="56" font-weight="700">Made.</text>
-                <text x="40" y="256" fill="#9AA3B5" font-family="Inter, sans-serif" font-size="16">Behind the scenes of an AI-powered ad</text>
-                <rect x="40" y="290" width="90" height="4" fill="#D4AF37"/>
-                <rect x="566" y="320" width="56" height="22" rx="4" fill="#000" fill-opacity=".8"/>
-                <text x="594" y="336" text-anchor="middle" fill="#fff" font-family="Inter, sans-serif" font-size="12">0:45</text>
-              </svg>
-            </div>
-            <div class="card-body">
-              <p class="card-cat">Thumbnail</p>
-              <h3>Video Thumbnail</h3>
-              <p>16:9 cover for YouTube or portfolio video cards. Sample concept only.</p>
-            </div>
-          </article>
-
-          <!-- Design Card 3: Event Poster (4:5) — sample concept -->
-          <article class="portfolio-card fade-up" data-category="design" data-lightbox-title="Event Poster — Sample concept (placeholder text, not client work)">
-            <div class="thumb design portrait">
-              <span class="badge concept">Sample concept</span>
-              <svg class="design-sample" viewBox="0 0 400 500" role="img" aria-label="Event poster sample concept">
-                <defs>
-                  <linearGradient id="ds3a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A1226"/><stop offset="1" stop-color="#05070B"/></linearGradient>
-                  <radialGradient id="ds3g" cx=".5" cy=".4" r=".6"><stop offset="0" stop-color="#D4AF37" stop-opacity=".35"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></radialGradient>
-                </defs>
-                <rect width="400" height="500" fill="url(#ds3a)"/>
-                <rect width="400" height="500" fill="url(#ds3g)"/>
-                <rect x="20" y="20" width="360" height="460" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
-                <rect x="28" y="28" width="344" height="444" fill="none" stroke="#D4AF37" stroke-opacity=".4"/>
-                <text x="200" y="90" text-anchor="middle" fill="#D4AF37" font-family="Inter, sans-serif" font-size="12" letter-spacing="6">YOU ARE INVITED</text>
-                <line x1="150" y1="108" x2="250" y2="108" stroke="#D4AF37"/>
-                <text x="200" y="200" text-anchor="middle" fill="#F4F1EA" font-family="Cormorant Garamond, serif" font-size="68" font-weight="700">Grand</text>
-                <text x="200" y="268" text-anchor="middle" fill="#F1D98A" font-family="Cormorant Garamond, serif" font-size="68" font-weight="700">Opening</text>
-                <circle cx="200" cy="332" r="26" fill="none" stroke="#D4AF37"/>
-                <path d="M188 332l8 8 16-18" fill="none" stroke="#D4AF37" stroke-width="2"/>
-                <text x="200" y="402" text-anchor="middle" fill="#F4F1EA" font-family="Inter, sans-serif" font-size="14">DATE · TIME · LOCATION</text>
-                <text x="200" y="432" text-anchor="middle" fill="#9AA3B5" font-family="Inter, sans-serif" font-size="12">Your Brand Name Here</text>
-              </svg>
-            </div>
-            <div class="card-body">
-              <p class="card-cat">Poster</p>
-              <h3>Event Poster</h3>
-              <p>4:5 elegant invitation or promo poster. Sample concept only.</p>
-            </div>
-          </article>
-
-          <!-- Design Card 4: Story / Reel Ad (9:16) — sample concept -->
-          <article class="portfolio-card fade-up" data-category="design" data-lightbox-title="Story / Reel Ad Creative — Sample concept (placeholder text, not client work)">
-            <div class="thumb design story-ratio">
-              <span class="badge concept">Sample concept</span>
-              <svg class="design-sample" viewBox="0 0 270 480" role="img" aria-label="Story ad creative sample concept">
-                <defs>
-                  <linearGradient id="ds4a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B2C57"/><stop offset=".55" stop-color="#0A1226"/><stop offset="1" stop-color="#05070B"/></linearGradient>
-                  <radialGradient id="ds4g" cx=".5" cy=".38" r=".5"><stop offset="0" stop-color="#D4AF37" stop-opacity=".5"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></radialGradient>
-                </defs>
-                <rect width="270" height="480" fill="url(#ds4a)"/>
-                <rect width="270" height="480" fill="url(#ds4g)"/>
-                <text x="135" y="60" text-anchor="middle" fill="#D4AF37" font-family="Inter, sans-serif" font-size="10" letter-spacing="5">YOUR BRAND</text>
-                <text x="135" y="170" text-anchor="middle" fill="#F4F1EA" font-family="Cormorant Garamond, serif" font-size="44" font-weight="700">Limited</text>
-                <text x="135" y="214" text-anchor="middle" fill="#F1D98A" font-family="Cormorant Garamond, serif" font-size="44" font-weight="700">Offer</text>
-                <circle cx="135" cy="290" r="48" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
-                <text x="135" y="298" text-anchor="middle" fill="#F4F1EA" font-family="Cormorant Garamond, serif" font-size="26" font-weight="700">YOUR</text>
-                <text x="135" y="320" text-anchor="middle" fill="#D4AF37" font-family="Inter, sans-serif" font-size="10" letter-spacing="3">OFFER HERE</text>
-                <rect x="55" y="382" width="160" height="40" rx="20" fill="#D4AF37"/>
-                <text x="135" y="407" text-anchor="middle" fill="#05070B" font-family="Inter, sans-serif" font-size="12" font-weight="600" letter-spacing="2">SWIPE UP</text>
-                <path d="M127 450l8-8 8 8" fill="none" stroke="#D4AF37" stroke-width="2"/>
-              </svg>
-            </div>
-            <div class="card-body">
-              <p class="card-cat">Ad Creative</p>
-              <h3>Story / Reel Ad</h3>
-              <p>9:16 vertical layout with a clear call to action. Sample concept only.</p>
-            </div>
-          </article>
-        </div>
-
-        <!-- Featured External Reference -->
-        <div class="featured-ref fade-up">
-          <div>
-            <p class="ref-label">External Creative Reference</p>
-            <h3>Inspiration from Instagram</h3>
-            <p>Shown as inspiration only. This is not a video created by Mannat.</p>
-          </div>
-          <a href="https://www.instagram.com/reel/DeMuSsTiKfb/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View Reference on Instagram</a>
-        </div>
-
-        <p class="portfolio-note fade-up">Graphic design layouts above are sample concepts with placeholder text—not client work. Original samples are being added. Contact me for a custom demo.</p>
-      </div>
-    </section>
-
-    <!-- ========== WHY WORK WITH ME ========== -->
-    <section class="why" id="why" aria-labelledby="why-heading">
-      <div class="container">
-        <div class="section-header fade-up">
-          <span class="label section-label">Collaboration</span>
-          <h2 id="why-heading">Why work with me</h2>
-          <div class="hairline" style="margin-top: 1.25rem;"></div>
-        </div>
-        <div class="why-grid">
-          <div class="why-item fade-up">
-            <p class="num">01</p>
-            <h3>Remote-first</h3>
-            <p>Seamless collaboration across time zones for clients worldwide.</p>
-          </div>
-          <div class="why-item fade-up">
-            <p class="num">02</p>
-            <h3>Clear communication</h3>
-            <p>Straightforward updates and feedback loops at every stage.</p>
-          </div>
-          <div class="why-item fade-up">
-            <p class="num">03</p>
-            <h3>Flexible formats</h3>
-            <p>Deliverables tailored for each platform—horizontal, vertical, or both.</p>
-          </div>
-          <div class="why-item fade-up">
-            <p class="num">04</p>
-            <h3>Fast turnaround</h3>
-            <p>Efficient process designed for timely delivery without sacrificing quality.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== CONTACT ========== -->
-    <section class="contact" id="contact" aria-labelledby="contact-heading">
-      <div class="container">
-        <div class="contact-layout">
-          <div class="contact-info fade-up">
-            <span class="label section-label">Contact</span>
-            <h2 id="contact-heading">Let's create something</h2>
-            <p class="muted" style="margin-top: 0.75rem;">Tell me about your project. I'll respond with next steps.</p>
-            <div class="contact-details">
-              <div class="contact-detail">
-                <span>Name</span>
-                <p>Mannat</p>
-              </div>
-              <div class="contact-detail">
-                <span>Email</span>
-                <a href="mailto:mannatkohli200@gmail.com">mannatkohli200@gmail.com</a>
-              </div>
-              <div class="contact-detail">
-                <span>Phone</span>
-                <a href="tel:+917087364633">+91 70873 64633</a>
-              </div>
-              <div class="contact-detail">
-                <span>Location</span>
-                <p>India</p>
-              </div>
-            </div>
-            <div class="availability">
-              Available for international clients. Replies within 24 to 48 hours.
-            </div>
-          </div>
-
-          <div class="form-card fade-up">
-            <!--
-              FORM SETUP: This form builds a mailto: link with prefilled subject and body.
-              To switch to Formspree: set form action to your Formspree endpoint and method="POST".
-              To switch to Netlify Forms: add netlify attribute and a form-name input.
-            -->
-            <form id="contact-form" novalidate>
-              <div class="form-message" id="form-message" role="alert" aria-live="polite"></div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="text" id="name" name="name" required autocomplete="name" placeholder="Your name" />
-                </div>
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@company.com" />
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="project-type">Project Type</label>
-                  <select id="project-type" name="project-type" required>
-                    <option value="" disabled selected>Select a service</option>
-                    <option value="AI UGC-Style Ads">AI UGC-Style Ads</option>
-                    <option value="AI Product Advertisement">AI Product Advertisement</option>
-                    <option value="Cinematic AI Video">Cinematic AI Video</option>
-                    <option value="Short-Form Reels">Short-Form Reels</option>
-                    <option value="Graphic Design">Graphic Design</option>
-                    <option value="Video + Graphic Design Bundle">Video + Graphic Design Bundle</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="budget">Budget Range <span class="muted">(optional)</span></label>
-                  <select id="budget" name="budget">
-                    <option value="" selected>Prefer not to say</option>
-                    <option value="Under $500">Under $500</option>
-                    <option value="$500 – $1,500">$500 – $1,500</option>
-                    <option value="$1,500 – $3,000">$1,500 – $3,000</option>
-                    <option value="$3,000+">$3,000+</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" required placeholder="Briefly describe your project, goals, and timeline..."></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ========== LIGHTBOX (for design samples when images are added) ========== -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview" hidden>
-    <div class="lightbox-inner">
-      <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
-      <img id="lightbox-img" src="" alt="" />
-      <p class="lightbox-caption" id="lightbox-caption"></p>
     </div>
-  </div>
+    <div class="scroll-indicator">
+      <div class="mouse"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
 
-  <!-- ========== FOOTER ========== -->
-  <footer class="footer" role="contentinfo">
-    <div class="container footer-inner">
-      <a href="#home" class="wordmark">MANNAT</a>
-      <nav class="footer-links" aria-label="Footer">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="footer-contact">
-        <a href="mailto:mannatkohli200@gmail.com">mannatkohli200@gmail.com</a>
-        <a href="tel:+917087364633">+91 70873 64633</a>
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="label section-label">About</span>
+        <h2>Story first. Visuals that convert.</h2>
       </div>
-      <p class="copyright">&copy; 2026 Mannat. All rights reserved.</p>
+      <div class="about-content fade-up">
+        <p>
+          Mannat is an AI video creator focused on <strong>brand storytelling</strong>, AI UGC-style ads, product advertisements, cinematic AI videos, and short-form social media content.
+        </p>
+        <p>
+          Alongside video, Mannat also creates graphic design assets such as social media creatives, thumbnails, and promotional visuals so a brand's look stays consistent across every platform.
+        </p>
+        <div class="focus-tags">
+          <span class="focus-tag">UGC Ads</span>
+          <span class="focus-tag">Product Ads</span>
+          <span class="focus-tag">Cinematic</span>
+          <span class="focus-tag">Reels</span>
+          <span class="focus-tag">Graphic Design</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="label section-label">Services</span>
+        <h2>What I create</h2>
+        <p>Video and design services tailored for brands, agencies, and creators.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card fade-up">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          <h3>UGC-Style Ads</h3>
+          <p>Authentic, creator-led product videos that feel native on social platforms and drive conversion.</p>
+        </div>
+        <div class="service-card fade-up">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <h3>Product Ads</h3>
+          <p>Clean, high-converting product showcases with strong visual storytelling and clear CTAs.</p>
+        </div>
+        <div class="service-card fade-up">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <h3>Cinematic AI Videos</h3>
+          <p>Brand films and narrative pieces with cinematic lighting, pacing, and emotional tone.</p>
+        </div>
+        <div class="service-card fade-up">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+          <h3>Short-Form Reels</h3>
+          <p>Vertical, scroll-stopping content optimized for Instagram, TikTok, and YouTube Shorts.</p>
+        </div>
+        <div class="service-card fade-up">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <h3>Graphic Design</h3>
+          <p>Brand-ready visuals that match the look of the videos—social posts and stories, ad creatives, thumbnails, covers, posters, banners, and brand-style assets.</p>
+        </div>
+        <div class="service-card fade-up">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <h3>Full Package</h3>
+          <p>Video and graphic design created together, so your thumbnails, posts, and ads all feel like one brand.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="label section-label">Portfolio</span>
+        <h2 id="portfolio-heading">Selected work</h2>
+        <p>A selection of AI-crafted video and design work. More samples are being added.</p>
+        <div class="hairline" style="margin-top: 1.25rem;"></div>
+      </div>
+
+      <div class="filters fade-up" role="group" aria-label="Filter portfolio">
+        <button class="filter-chip active" data-filter="all">All</button>
+        <button class="filter-chip" data-filter="ugc">UGC Ads</button>
+        <button class="filter-chip" data-filter="product">Product Ads</button>
+        <button class="filter-chip" data-filter="cinematic">Cinematic</button>
+        <button class="filter-chip" data-filter="reels">Reels</button>
+        <button class="filter-chip" data-filter="design">Graphic Design</button>
+      </div>
+
+      <div class="portfolio-grid" id="portfolio-grid">
+        <!-- Card 1: Minimal Skincare Product Ad (NEW) -->
+        <!-- IMPORTANT: Upload portfolio-skincare-minimal.mp4 to the same folder as this HTML file -->
+        <article class="portfolio-card fade-up" data-category="product">
+          <div class="thumb vertical has-video">
+            <video
+              controls
+              playsinline
+              webkit-playsinline
+              preload="metadata"
+              aria-label="Minimal skincare routine product advertisement by Mannat">
+              <source src="portfolio-skincare-minimal.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="card-body">
+            <p class="card-cat">Product Ads</p>
+            <h3>Minimal Skincare Routine</h3>
+            <p>Clean UGC-style product ad — less scrolling, less guessing. Calm skin barrier story.</p>
+          </div>
+        </article>
+
+        <!-- Card 2: Product — live sample -->
+        <!-- IMPORTANT: Keep portfolio-product-ad-01.mp4 and portfolio-product-ad-01-poster.jpg in the SAME folder as this HTML file -->
+        <article class="portfolio-card fade-up" data-category="product">
+          <div class="thumb vertical has-video">
+            <video
+              controls
+              playsinline
+              webkit-playsinline
+              preload="auto"
+              poster="portfolio-product-ad-01-poster.jpg"
+              aria-label="Enzyme cleanser product advertisement by Mannat">
+              <source src="portfolio-product-ad-01.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="card-body">
+            <p class="card-cat">Product Ads</p>
+            <h3>Enzyme Cleanser Product Ad</h3>
+            <p>Cinematic product advertisement for a deep-clean enzyme cleanser — vertical, brand-ready.</p>
+          </div>
+        </article>
+
+        <!-- Card 3: Cinematic -->
+        <!-- SWAP: Replace the .thumb contents with <iframe>, <video>, or YouTube/Vimeo embed -->
+        <article class="portfolio-card fade-up" data-category="cinematic">
+          <div class="thumb">
+            <span class="badge">Sample coming soon</span>
+            <div class="play-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-cat">Cinematic</p>
+            <h3>Sample Project 03</h3>
+            <p>Brand film-style narrative with cinematic lighting and tone.</p>
+          </div>
+        </article>
+
+        <!-- Card 4: UGC -->
+        <article class="portfolio-card fade-up" data-category="ugc">
+          <div class="thumb">
+            <span class="badge">Sample coming soon</span>
+            <div class="play-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-cat">UGC Ads</p>
+            <h3>Sample Project 04</h3>
+            <p>Creator-style product showcase for social platforms.</p>
+          </div>
+        </article>
+
+        <!-- Card 5: UGC -->
+        <article class="portfolio-card fade-up" data-category="ugc">
+          <div class="thumb">
+            <span class="badge">Sample coming soon</span>
+            <div class="play-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-cat">UGC Ads</p>
+            <h3>Sample Project 05</h3>
+            <p>Authentic testimonial-style ad for lifestyle brands.</p>
+          </div>
+        </article>
+
+        <!-- Card 6: Cinematic -->
+        <article class="portfolio-card fade-up" data-category="cinematic">
+          <div class="thumb">
+            <span class="badge">Sample coming soon</span>
+            <div class="play-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-cat">Cinematic</p>
+            <h3>Sample Project 06</h3>
+            <p>Brand film-style narrative with cinematic lighting and tone.</p>
+          </div>
+        </article>
+
+        <!-- Design Card 1: Social Post (1:1) — sample concept, not client work -->
+        <article class="portfolio-card fade-up" data-category="design" data-lightbox-title="Social Media Post — Sample concept (placeholder text, not client work)">
+          <div class="thumb design square">
+            <span class="badge concept">Sample concept</span>
+            <svg class="design-sample" viewBox="0 0 400 400" role="img" aria-label="Square social media post sample concept">
+              <defs>
+                <linearGradient id="ds1a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E1A33"/><stop offset="1" stop-color="#05070B"/></linearGradient>
+                <radialGradient id="ds1g" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#D4AF37" stop-opacity=".55"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></radialGradient>
+                <linearGradient id="ds1b" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F1D98A"/><stop offset="1" stop-color="#B8921F"/></linearGradient>
+              </defs>
+              <rect width="400" height="400" fill="url(#ds1a)"/>
+              <circle cx="270" cy="210" r="150" fill="url(#ds1g)"/>
+              <rect x="40" y="40" width="120" height="8" rx="4" fill="url(#ds1b)"/>
+              <text x="40" y="90" fill="#F4F1EA" font-family="Cormorant Garamond, serif" font-size="28" font-weight="500">NEW DROP</text>
+              <text x="40" y="130" fill="#9AA3B5" font-family="Inter, sans-serif" font-size="14">Limited edition</text>
+            </svg>
+          </div>
+          <div class="card-body">
+            <p class="card-cat">Graphic Design</p>
+            <h3>Social Media Post</h3>
+            <p>1:1 square format for Instagram feed. Sample concept only.</p>
+          </div>
+        </article>
+
+        <!-- Design Card 2: Video Thumbnail (16:9) — sample concept -->
+        <article class="portfolio-card fade-up" data-category="design" data-lightbox-title="Video Thumbnail — Sample concept (placeholder text, not client work)">
+          <div class="thumb design">
+            <span class="badge concept">Sample concept</span>
+            <svg class="design-sample" viewBox="0 0 640 360" role="img" aria-label="Video thumbnail sample concept">
+              <defs>
+                <linearGradient id="ds2a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0A1226"/><stop offset="1" stop-color="#05070B"/></linearGradient>
+                <linearGradient id="ds2b" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#D4AF37"/><stop offset="1" stop-color="#F1D98A"/></linearGradient>
+              </defs>
+              <rect width="640" height="360" fill="url(#ds2a)"/>
+              <rect x="40" y="40" width="160" height="28" rx="4" fill="url(#ds2b)"/>
+              <text x="120" y="60" text-anchor="middle" fill="#05070B" font-family="Inter, sans-serif" font-size="12" font-weight="600" letter-spacing="2">AI VIDEO</text>
+              <text x="40" y="120" fill="#F4F1EA" font-family="Cormorant Garamond, serif" font-size="36" font-weight="500">Cinematic Story</text>
+              <text x="40" y="160" fill="#9AA3B5" font-family="Inter, sans-serif" font-size="16">Brand film concept</text>
+              <circle cx="520" cy="180" r="40" fill="none" stroke="#D4AF37" stroke-width="2"/>
+              <polygon points="510,165 510,195 540,180" fill="#D4AF37"/>
+            </svg>
+          </div>
+          <div class="card-body">
+            <p class="card-cat">Graphic Design</p>
+            <h3>Video Thumbnail</h3>
+            <p>16:9 cover for YouTube or portfolio video cards. Sample concept only.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="label section-label">Process</span>
+        <h2>How we work together</h2>
+      </div>
+      <div class="process-steps">
+        <div class="process-step fade-up">
+          <h3>Brief</h3>
+          <p>Share your brand, product, and goals. I’ll ask the right questions.</p>
+        </div>
+        <div class="process-step fade-up">
+          <h3>Concept</h3>
+          <p>Script, visual direction, and mood references aligned to your brand.</p>
+        </div>
+        <div class="process-step fade-up">
+          <h3>Create</h3>
+          <p>AI-powered production with cinematic quality and brand consistency.</p>
+        </div>
+        <div class="process-step fade-up">
+          <h3>Deliver</h3>
+          <p>Final files ready for ads, social, and your website.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="label section-label">Contact</span>
+        <h2>Let’s create something</h2>
+        <p>Tell me about your project. I’ll reply within 24–48 hours.</p>
+      </div>
+      <form class="contact-form fade-up" action="https://formspree.io/f/your-form-id" method="POST">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="project">Project Type</label>
+          <select id="project" name="project">
+            <option value="">Select…</option>
+            <option value="UGC Ad">UGC Ad</option>
+            <option value="Product Ad">Product Ad</option>
+            <option value="Cinematic AI Video">Cinematic AI Video</option>
+            <option value="Reels / Shorts">Reels / Shorts</option>
+            <option value="Graphic Design">Graphic Design</option>
+            <option value="Video + Graphic Design Bundle">Video + Graphic Design Bundle</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Mannat · AI Video Creator</p>
     </div>
   </footer>
 
   <script>
-    (function () {
-      "use strict";
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
 
-      /* ----- Sticky nav blur on scroll ----- */
-      const nav = document.getElementById("nav");
-      const onScroll = () => {
-        nav.classList.toggle("scrolled", window.scrollY > 40);
-      };
-      window.addEventListener("scroll", onScroll, { passive: true });
-      onScroll();
-
-      /* ----- Letterbox reveal on load ----- */
-      const topBar = document.getElementById("letterbox-top");
-      const bottomBar = document.getElementById("letterbox-bottom");
-      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        requestAnimationFrame(() => {
-          topBar.classList.add("reveal");
-          bottomBar.classList.add("reveal");
-        });
-      }
-
-      /* ----- Mobile menu ----- */
-      const hamburger = document.getElementById("hamburger");
-      const mobileMenu = document.getElementById("mobile-menu");
-      const toggleMenu = (open) => {
-        const isOpen = open !== undefined ? open : !mobileMenu.classList.contains("open");
-        mobileMenu.classList.toggle("open", isOpen);
-        hamburger.classList.toggle("active", isOpen);
-        hamburger.setAttribute("aria-expanded", String(isOpen));
-        hamburger.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
-        document.body.style.overflow = isOpen ? "hidden" : "";
-      };
-      hamburger.addEventListener("click", () => toggleMenu());
-      mobileMenu.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => toggleMenu(false));
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+    });
+    document.querySelectorAll('.mobile-link, .btn-hire-mobile').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('open');
       });
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && mobileMenu.classList.contains("open")) toggleMenu(false);
-      });
+    });
 
-      /* ----- Smooth anchor scroll (handles fixed nav offset) ----- */
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", (e) => {
-          const id = anchor.getAttribute("href");
-          if (id === "#") return;
-          const target = document.querySelector(id);
-          if (target) {
-            e.preventDefault();
-            const offset = nav.offsetHeight + 8;
-            const top = target.getBoundingClientRect().top + window.scrollY - offset;
-            window.scrollTo({ top, behavior: "smooth" });
-          }
+    // Fade-up on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Portfolio filter
+    const chips = document.querySelectorAll('.filter-chip');
+    const cards = document.querySelectorAll('.portfolio-card');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const filter = chip.dataset.filter;
+        cards.forEach(card => {
+          const cat = card.dataset.category;
+          card.style.display = (filter === 'all' || cat === filter) ? '' : 'none';
         });
       });
+    });
 
-      /* ----- Fade-up on scroll (IntersectionObserver) ----- */
-      const fadeEls = document.querySelectorAll(".fade-up");
-      if ("IntersectionObserver" in window) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-        );
-        fadeEls.forEach((el) => observer.observe(el));
-      } else {
-        fadeEls.forEach((el) => el.classList.add("visible"));
-      }
-
-      /* ----- Portfolio filter ----- */
-      const chips = document.querySelectorAll(".filter-chip");
-      const cards = document.querySelectorAll(".portfolio-card");
-      chips.forEach((chip) => {
-        chip.addEventListener("click", () => {
-          chips.forEach((c) => c.classList.remove("active"));
-          chip.classList.add("active");
-          const filter = chip.dataset.filter;
-          cards.forEach((card) => {
-            const match = filter === "all" || card.dataset.category === filter;
-            card.classList.toggle("hidden", !match);
-          });
-        });
-      });
-
-      /* ----- Contact form: mailto with validation ----- */
-      const form = document.getElementById("contact-form");
-      const formMsg = document.getElementById("form-message");
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        formMsg.className = "form-message";
-        formMsg.textContent = "";
-
-        const name = form.name.value.trim();
-        const email = form.email.value.trim();
-        const projectType = form["project-type"].value;
-        const budget = form.budget.value;
-        const message = form.message.value.trim();
-
-        if (!name || !email || !projectType || !message) {
-          formMsg.className = "form-message error";
-          formMsg.textContent = "Please fill in all required fields.";
-          return;
-        }
-        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        if (!emailOk) {
-          formMsg.className = "form-message error";
-          formMsg.textContent = "Please enter a valid email address.";
-          return;
-        }
-
-        const subject = encodeURIComponent(`Portfolio Enquiry — ${projectType} — ${name}`);
-        let body = `Name: ${name}\nEmail: ${email}\nProject Type: ${projectType}`;
-        if (budget) body += `\nBudget Range: ${budget}`;
-        body += `\n\nMessage:\n${message}`;
-        const mailto = `mailto:mannatkohli200@gmail.com?subject=${subject}&body=${encodeURIComponent(body)}`;
-
-        formMsg.className = "form-message success";
-        formMsg.textContent = "Opening your email client… If nothing opens, email mannatkohli200@gmail.com directly.";
-        window.location.href = mailto;
-      });
-
-      /* ----- Lightbox for design portfolio samples (SVG or img) ----- */
-      const lightbox = document.getElementById("lightbox");
-      const lightboxImg = document.getElementById("lightbox-img");
-      const lightboxCaption = document.getElementById("lightbox-caption");
-      const lightboxClose = document.getElementById("lightbox-close");
-      const lightboxInner = lightbox.querySelector(".lightbox-inner");
-      let lastFocus = null;
-
-      const clearLightboxMedia = () => {
-        lightboxImg.removeAttribute("src");
-        lightboxImg.style.display = "";
-        const oldSvg = lightboxInner.querySelector("svg.lightbox-svg");
-        if (oldSvg) oldSvg.remove();
-      };
-
-      const openLightboxFromCard = (card) => {
-        lastFocus = document.activeElement;
-        clearLightboxMedia();
-        const title = card.dataset.lightboxTitle || "";
-        lightboxCaption.textContent = title;
-
-        const img = card.querySelector("img[data-full], img");
-        const svg = card.querySelector("svg.design-sample");
-
-        if (img) {
-          lightboxImg.style.display = "block";
-          lightboxImg.src = img.getAttribute("data-full") || img.src;
-          lightboxImg.alt = img.alt || title;
-        } else if (svg) {
-          lightboxImg.style.display = "none";
-          const clone = svg.cloneNode(true);
-          clone.classList.add("lightbox-svg");
-          clone.removeAttribute("class");
-          clone.classList.add("lightbox-svg");
-          clone.style.width = "min(100%, 640px)";
-          clone.style.height = "auto";
-          clone.style.maxHeight = "85vh";
-          lightboxInner.insertBefore(clone, lightboxCaption);
-        } else {
-          return;
-        }
-
-        lightbox.hidden = false;
-        requestAnimationFrame(() => lightbox.classList.add("open"));
-        lightboxClose.focus();
-        document.body.style.overflow = "hidden";
-      };
-
-      const closeLightbox = () => {
-        lightbox.classList.remove("open");
-        document.body.style.overflow = "";
-        setTimeout(() => {
-          lightbox.hidden = true;
-          clearLightboxMedia();
-          if (lastFocus) lastFocus.focus();
-        }, 300);
-      };
-
-      document.querySelectorAll('.portfolio-card[data-category="design"]').forEach((card) => {
-        card.setAttribute("tabindex", "0");
-        card.setAttribute("role", "button");
-        const activate = () => openLightboxFromCard(card);
-        card.addEventListener("click", activate);
-        card.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            activate();
-          }
-        });
-      });
-      lightboxClose.addEventListener("click", closeLightbox);
-      lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox) closeLightbox();
-      });
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && lightbox.classList.contains("open")) closeLightbox();
-      });
-    })();
+    // Letterbox reveal on load
+    setTimeout(() => {
+      document.querySelectorAll('.letterbox').forEach(el => el.classList.add('reveal'));
+    }, 400);
   </script>
 </body>
 </html>
